@@ -6,7 +6,7 @@ import sqlite3
 #Desarrollo de interfaz gráfica
 
 root= Tk()
-root.title("Aplicación CRUD con Base de datos")
+root.title("Gestión interna de PALEVLAS - Protectora")
 root.geometry("600x600")
 
 miId=StringVar()
@@ -50,7 +50,7 @@ def mensaje():
     Versión 1.0
     Tecnología Python Tkinter    
     """
-    messagebox.showinfo(title="IINFORMACION", message= acerca)
+    messagebox.showinfo(title="INFORMACION", message= acerca)
 
 
 def crear():

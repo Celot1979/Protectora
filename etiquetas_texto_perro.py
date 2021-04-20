@@ -1,57 +1,6 @@
-from BBDD import mostrar
-from tkinter import *
-from tkinter import messagebox
-from tkinter import ttk
-from etiquetas_texto_perro import *
-
+from tkinter import*
 import sqlite3
-def perro(ventana_dos):
-    ventana_dos.iconmask()
-    dog = Toplevel()
-    dog.geometry("5000x5000")
-    dog.title("Entrada en PALEVLAS")
-    #FUNCIONES
-
-    def mensaje():
-        print("hola")
-
-    
-    menubar = Menu(dog)
-    Nuevo = Menu(menubar, tearoff=0)
-    Editar = Menu(menubar, tearoff=0)
-    borrar = Menu(menubar, tearoff=0)
-    salir = Menu(menubar, tearoff=0)
-    dog.config(menu=menubar)
-    #FUNCIONES
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    #Menu
-    menubar.add_cascade(label="Nuevo", menu= Nuevo)
-    #menubar.add_cascade(label="Editar", menu= Editar)
-    #menubar.add_cascade(label="Borrar", menu= borrar)
-    #menubar.add_cascade(label="Salir", menu= salir) 
-    
-    Nuevo.add_command(label="Nueva alta", command=lambda: nuevaAlta(dog))
-    Nuevo.add_command(label="Crear/ conectar BBDD", command=mostrar)
-    Nuevo.add_command(label="Elimnar BBDD", command=mostrar)
+def nuevaAlta(dog):
     #Variables
     id =StringVar()
     nombre=StringVar()
@@ -105,23 +54,26 @@ def perro(ventana_dos):
     vacunado.place(x=750, y=240)
     vacunado_txt= Entry(dog, width=20, textvariable=vacunado, background="azure")
     vacunado_txt.place(x=900, y= 240)
-    #Botones de prueba. Los botones reales ya están en etiquetas_texto.py
-    b1P=Button(dog, text="Crea Registro",command= crear)
+    #Botones de prueba
+    b1P=Button(dog, text="Crea Registro")
     b1P.place(x=400, y= 320)
-    b2P=Button(dog, text="Modificar registro", command= actualizar)
+    b2P=Button(dog, text="Modificar registro")
     b2P.place(x=600, y= 320)
-    b3p=Button(dog, text="Mostrar Lista", command= mostrar)
+    b3p=Button(dog, text="Mostrar Lista")
     b3p.place(x=800, y= 320)
-    b4p=Button(dog, text="Eliminar Registro", command= borrar)
+    b4p=Button(dog, text="Eliminar Registro")
     b4p.place(x=1000, y= 320)
     b4p.config(bg="red")
-    
-    
-    
-    
 
 
 
 
-
-    dog.mainloop()
+    #b1=Button(dog, text="Crea Registro", #command= crear)
+    #b1.place(x=400, y= 320)
+    #b2=Button(dog, text="Modificar registro", command= actualizar)
+    #b2.place(x=120, y= 400)
+    #b3=Button(dog, text="Mostrar Lista", command= mostrar)
+    #b3.place(x=270, y= 400)
+    #b4=Button(dog, text="Eliminar Registro", command= borrar)
+    #b4.place(x=390, y= 400)
+    #b4.config(bg="red")

@@ -1,5 +1,7 @@
 from tkinter import*
 from perro3 import*
+from etiquetas_texto_perro import *
+from Tabla_perro import*
 def segunda_ventana(root):
     root.iconmask()
     
@@ -35,8 +37,6 @@ def segunda_ventana(root):
     gatos = Button(ventana_dos, text="Entrada de gatos", width=20, height=6,background="blue", activebackground="blue" )
     gatos.place(x=600, y= 600)
     gatos.config(overrelief=GROOVE, relief=FLAT)
-
-
 
 
     
