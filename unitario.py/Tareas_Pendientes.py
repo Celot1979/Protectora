@@ -1,0 +1,2 @@
+""" Debemos Revisar el método para el calendario en visitas. Está bien, pero no podemos moverlo hacia una parte de la interfaz para que 
+quede fijado .0Por otro lado, de nada sirve si la fecha escogida lo lo recoge el entry de fecha de cita y se puede  memorizar en la BBDD"""

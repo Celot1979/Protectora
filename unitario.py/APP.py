@@ -3,6 +3,10 @@ from tkinter import messagebox
 from tkinter import ttk
 import  csv
 import sqlite3
+from datetime import date
+from datetime import datetime
+from tkinter import *
+from tkcalendar import Calendar
 
 #***************************************** VENTANA PRINCIPAL  ******************************************************************************************
 #****************************************  PANTALLA PRINCIPAL ******************************************************************************************
@@ -234,6 +238,12 @@ def segunda_ventana():
             
             segunda_ventana()
 
+        def Fecha_actual():
+            now = datetime.now()
+            format = now.strftime('%d - %m - %Y')
+            miFecha.set(format)
+            miFecha.get()
+
         #La funcionalidad está concluida.
         ############################# DISEÑO DE LA INTERFAZ ########################################################
         #1º Menú INICIO
@@ -282,7 +292,7 @@ def segunda_ventana():
 
         l5= Label(perro, text="Fecha de Registro")
         l5.place(x=350, y=10)
-        l5=Entry(perro, textvariable=miFecha)
+        l5=Entry(perro, textvariable=miFecha, width= 20)
         l5.place(x=475, y= 10)
         #Botones
         b1=Button(perro, text="Crea Registro", command= crear)
@@ -294,6 +304,9 @@ def segunda_ventana():
         b4=Button(perro, text="Eliminar Registro", command= borrar)
         b4.place(x=390, y= 400)
         b4.config(bg="red")
+
+        b5=Button(perro, text="Registrar Fecha", command= Fecha_actual)
+        b5.place(x=700, y= 10)
         perro.config(menu=menubar)
         perro.mainloop()
 
@@ -432,8 +445,15 @@ def segunda_ventana():
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al intentar eliminar el registro")
             limpiarCampos()
             mostrar()
+
         def pagina_anterior():
             segunda_ventana()
+
+        def Fecha_actual():
+            now = datetime.now()
+            format = now.strftime('%d - %m - %Y')
+            miFecha.set(format)
+            miFecha.get()
         #La funcionalidad está concluida.
         ############################# DISEÑO DE LA INTERFAZ ########################################################
         #1º Menú INICIO
@@ -493,14 +513,17 @@ def segunda_ventana():
         b3.place(x=270, y= 400)
         b4=Button(gato, text="Eliminar Registro", command= borrar)
         b4.place(x=390, y= 400)
-        b4.config(bg="red")
+
+        b5=Button(gato, text="Registrar Fecha", command= Fecha_actual)
+        b5.place(x=700, y= 10)
+        b5.config(bg="red")
         gato.config(menu=menubar)
         gato.mainloop()
 
     #---------------------------------------------------------------------------------------------------------------------
     #Una vez que el usuario acepta hacer un nuevo registro le sale la nueva pantalla
-    #********************************************* VENTANA VISITAS  ******************************************************************************************
-    #************************************** QUINTA  PANTALLA PRINCIPAL ******************************************************************************************
+    #****************************************************** VENTANA VISITAS  ******************************************************************************************
+    #************************************************* QUINTA  PANTALLA PRINCIPAL ******************************************************************************************
     #********************************************************************************************************************************************************************
     def registro_visitas():
         root.iconify()
@@ -634,6 +657,10 @@ def segunda_ventana():
             mostrar()
         def pagina_anterior():
             segunda_ventana()
+
+        def programar_visita():
+            pass
+            
         #La funcionalidad está concluida.
         ############################# DISEÑO DE LA INTERFAZ ########################################################
         #1º Menú INICIO
@@ -652,6 +679,20 @@ def segunda_ventana():
         atrasmenu = Menu(menubar, tearoff=0)
         atrasmenu.add_command(label="Pagina anterior", command=pagina_anterior)
         menubar.add_cascade(label="Páginas anterior", menu= atrasmenu)
+        ############################################################################################################################################################
+        ############################################################################################################################################################
+        #########################################################  C A L E N D A R I O ###############################################################################################
+        ############################################################################################################################################################
+        ############################################################################################################################################################
+        #CALENDARIO
+        cal = Calendar(visita, selectmode = 'day',year = 2020, month = 5,day = 22)
+        cal.pack(pady = 20)
+        def grad_date():
+            date.config(text = "Día de la cita: " + cal.get_date())
+        Button(visita, text = "Calendario para gestionar citas",command = grad_date).pack(pady = 20)
+        date = Label(visita, text = "")
+        date.pack(pady = 20)
+        ####################################################################################################################################
         #Etiquetas y cajas de texto
         e1= Entry(visita, textvariable=miId)
 
@@ -694,6 +735,8 @@ def segunda_ventana():
         b4=Button(visita, text="Eliminar Registro", command= borrar)
         b4.place(x=390, y= 400)
         b4.config(bg="red")
+
+        
         visita.config(menu=menubar)
         visita.mainloop()
 
