@@ -1,7 +1,6 @@
 from tkinter import*
 from perro3 import*
-from etiquetas_texto_perro import *
-from Tabla_perro import*
+
 def segunda_ventana(root):
     root.iconmask()
     
