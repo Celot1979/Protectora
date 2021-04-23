@@ -86,7 +86,7 @@ def segunda_ventana():
             registro_gato()
 
     def ingreso_visitas():
-        valor = messagebox.askquestion("Registrar","¿Deseas registraruna nueva visita? ")
+        valor = messagebox.askquestion("Registrar","¿Deseas registrar una nueva visita? ")
         if valor == "yes":
             registro_visitas()
 
@@ -531,6 +531,7 @@ def segunda_ventana():
         visita = Toplevel()
         visita.geometry("5000x5000")
         visita.title("Registro de nueva visita")
+        
         ############################################## COMENZAMOS LA BBDD Y REGISTROS ###########################################################
         miId=StringVar()
         miNombre= StringVar()
@@ -637,7 +638,7 @@ def segunda_ventana():
             miCursor= miConexion.cursor()
             try:
                 datos = miNombre.get(),miApellidos.get(),miDNI.get(),miResidencia.get(),miMotivo.get(),miFecha.get()
-                miCursor.execute("UPDATE gato SET NOMBRE = ?, APELLIDOS = ?, DNI = ?, RESIDENCIA = ?, MOTIVO = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos))
+                miCursor.execute("UPDATE visita SET NOMBRE = ?, APELLIDOS = ?, DNI = ?, RESIDENCIA = ?, MOTIVO = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos))
                 miConexion.commit()
             except:
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al actualizar el resgistro")
@@ -649,7 +650,7 @@ def segunda_ventana():
             miCursor= miConexion.cursor()
             try:
                 if messagebox.askyesno(message="¿Realmente desea eliminar el registro?", title="ADVERTENCIA"):
-                    miCursor.execute("DELETE FROM gato WHERE ID =" + miId.get())
+                    miCursor.execute("DELETE FROM visita WHERE ID =" + miId.get())
                     miConexion.commit()
             except:
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al intentar eliminar el registro")
@@ -685,11 +686,15 @@ def segunda_ventana():
         ############################################################################################################################################################
         ############################################################################################################################################################
         #CALENDARIO
-        cal = Calendar(visita, selectmode = 'day',year = 2020, month = 5,day = 22)
-        cal.pack(pady = 20)
+        cal = Calendar(visita, selectmode = 'day',year = 2021, month = 4,day = 23)
+        cal.place(x=1200, y = 150)
+        
         def grad_date():
-            date.config(text = "Día de la cita: " + cal.get_date())
-        Button(visita, text = "Calendario para gestionar citas",command = grad_date).pack(pady = 20)
+            date.config(text = "Día de la cita: " + cal.get_date() )
+            miFecha.set(cal.get_date())
+            miFecha.get()
+        B=Button(visita, text = "Calendario para gestionar citas",command = grad_date)
+        B.place(x=1200, y = 300)
         date = Label(visita, text = "")
         date.pack(pady = 20)
         ####################################################################################################################################
