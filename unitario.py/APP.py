@@ -35,36 +35,105 @@ PasswordL.place(x=800, y= 140)
 nombreE=Entry(root, width= 20, textvariable=nombre,background="azure")
 nombreE.place(x=1000, y= 78)
 
-PasswordE=Entry(root, width= 20, textvariable=Contrasena,background="azure")
+PasswordE=Entry(root, width= 20, textvariable=Contrasena, show= "*",background="azure")
 PasswordE.place(x=1000, y= 138)
 
 Derechos = Label(root, text="Este programa pertenece a la protectora recibiendo los derechos del desarollador Daniel Gil", background="azure",font=("Monaco",10))
 Derechos.place(x=750, y = 900)
 #Funciones para la pantalla principal************************************
-def conectar():
+def limpiarCampos_registro():
+    nombre.set()
+    Contrasena.set()
+
+"""def conectar():#Función en desuso al crear usarios y contraseñas con base de datos
     if nombreE.get() == "Dani" and PasswordE.get() == "1":
         segunda_ventana()
     else:
-        print("Error")
+        print("Error")"""
 def borrar():
     nombreE.delete(0,END)
     PasswordE.delete(0,END)
 def salir():
     root.destroy()
+#Crear usario y logear con conexionBBDD
+########################################################################################################################################################################################################
+#################################### CREACION DE BBDD PARA REGISTROS OPERARIOS ###########################################################################################################################################
+########################################################################################################################################################################################################
+#CONEXIÓN BBDD
+def conexionBBDD_usuario():
+    miConexion = sqlite3.connect("Nuevo_Registro.db")
+    miCursor= miConexion.cursor()
+    try:
+        miCursor.execute("""CREATE TABLE nuevo(ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        NOMBRE VARCHAR(50) NOT NULL, 
+        PASSWORD VARCHAR(50) NOT NULL)""")
+        messagebox.showinfo("USUARIO REGISTRADO", "ENHORABUENA TE HAS REGISTRADO CON EXITO")
+    except:
+        messagebox.showinfo("USUARIO REGISTRADO", "ENHORABUENA TE HAS REGISTRADO CON EXITO")
+#Creacion de la BBDD
+def crear():
+    miConexion = sqlite3.connect("Nuevo_Registro.db")
+    miCursor= miConexion.cursor()
+    try:
+        datos = nombre.get(), Contrasena.get()
+        miCursor.execute("INSERT INTO nuevo VALUES(NULL,?,?)", (datos))
+        miConexion.commit()
+    except:
+        messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
+    limpiarCampos_registro()
+#REGISTRO DE EL NUEVO OPERARIO
+def registrar_nuevo():
+    conexionBBDD_usuario()
+    crear()
+    messagebox.showinfo("USUARIO REGISTRADO", "ENHORABUENA TE HAS REGISTRADO CON EXITO")
+    
+
+#SI EL USUARIO ES CORRECTO. COMIENZA SESIÓN   
+def inicio_usario():
+    miConexion = sqlite3.connect("Nuevo_Registro.db")
+    miCursor= miConexion.cursor()
+    
+    datos = nombre.get(), Contrasena.get()
+    lista = datos
+    miCursor.execute("SELECT * From nuevo")
+    rows = miCursor.fetchall()
+    for row in rows:
+        for dato in lista:
+            if row == dato:
+                print("eureka")
+            else:
+                print("Mierda")
+        
+    
+        
+    
+    
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+
+
+
+
 
 #Botones pantalla principal************************************
 #Aceptar******
-conecto = Button(root, text="Conectar", width= 8, background="blue", activebackground="blue", command=conectar)
-conecto.place(x=800, y=200)
+conecto = Button(root, text="Conectar", width= 8, background="blue", activebackground="blue", command= inicio_usario)
+conecto.place(x=600, y=200)
 conecto.config(overrelief=GROOVE, relief=FLAT)
 #Borrar*****
 borrar= Button(root, text="BORRAR", width= 8, background="blue", activebackground="blue", command=borrar)
-borrar.place(x=1000, y=200)
+borrar.place(x=800, y=200)
 borrar.config(overrelief=GROOVE, relief=FLAT)
 #Salir*****
 salir= Button(root, text="SALIR", width= 8, background="blue", activebackground="blue", command=salir)
-salir.place(x=1200, y=200)
+salir.place(x=1000, y=200)
 salir.config(overrelief=GROOVE, relief=FLAT)
+
+registrar= Button(root, text="Registrar nuevo usuario", width= 15, background="blue", activebackground="blue",command=registrar_nuevo)
+registrar.place(x=1200, y=200)
+registrar.config(overrelief=GROOVE, relief=FLAT)
 #***************************************** VENTANA DE OPCIONES  ******************************************************************************************
 #************************************** SEGUNDA PANTALLA PRINCIPAL ******************************************************************************************
 #********************************************************************************************************************************************************************
