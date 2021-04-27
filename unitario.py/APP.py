@@ -92,18 +92,17 @@ def registrar_nuevo():
 def inicio_usario():
     miConexion = sqlite3.connect("Nuevo_Registro.db")
     miCursor= miConexion.cursor()
-    
-    datos = nombre.get(), Contrasena.get()
-    lista = datos
-    miCursor.execute("SELECT * From nuevo")
-    rows = miCursor.fetchall()
-    for row in rows:
-        for dato in lista:
-            if row == dato:
-                print("eureka")
-            else:
-                print("Mierda")
-        
+    usuario = nombreE.get()
+    contr= PasswordE.get()
+    miCursor.execute('SELECT * FROM nuevo WHERE  nombre= ? AND password = ?', (usuario, contr))
+    if miCursor.fetchall():
+        messagebox.showinfo(title = "Login correcto", message = "Usuario y contraseña correctos")
+        segunda_ventana()
+    else:
+        messagebox.showerror(title = "LOGIN INCORRECTO", message = "VUELVA A ESCRIBIR USUARIO Y CONTRASEÑA")
+        borrar()
+    miCursor.close()
+
     
         
     
