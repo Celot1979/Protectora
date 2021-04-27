@@ -100,7 +100,8 @@ def inicio_usario():
         segunda_ventana()
     else:
         messagebox.showerror(title = "LOGIN INCORRECTO", message = "VUELVA A ESCRIBIR USUARIO Y CONTRASEÑA")
-        borrar()
+        nombreE.delete(0,END)
+        PasswordE.delete(0,END)
     miCursor.close()
 
     
