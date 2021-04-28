@@ -187,7 +187,7 @@ def segunda_ventana():
         miFecha=StringVar()
         #Conexión de la BBDD
         def conexionBBDD():
-            miConexion = sqlite3.connect("Perros.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 miCursor.execute("""CREATE TABLE perro(ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -201,7 +201,7 @@ def segunda_ventana():
             except:
                 messagebox.showinfo("CONEXION", "Conexión exitosa con la BBDD")
         def eliminarBBDD():
-            miConexion = sqlite3.connect("Perros.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             if messagebox.askyesno(mensaje = "¿Los Datos se perderán definitivamente, Desea continuar: ?", title="ADVERTENCIA"):
                 miCursor.execute("DROP TABLE perro")
@@ -231,7 +231,7 @@ def segunda_ventana():
             """
             messagebox.showinfo(title="INFORMACION", message= acerca)
         def crear():
-            miConexion = sqlite3.connect("Perros.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
@@ -243,7 +243,7 @@ def segunda_ventana():
             mostrar()
 
         def mostrar():
-            miConexion = sqlite3.connect("Perros.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             registros = tree.get_children()
             for elemento in registros:
@@ -280,7 +280,7 @@ def segunda_ventana():
         #Funciones 2ª
 
         def actualizar():
-            miConexion = sqlite3.connect("Perros.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
@@ -292,7 +292,7 @@ def segunda_ventana():
             limpiarCampos()
             mostrar()
         def borrar():
-            miConexion = sqlite3.connect("Perros.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 if messagebox.askyesno(message="¿Realmente desea eliminar el registro?", title="ADVERTENCIA"):
@@ -399,7 +399,7 @@ def segunda_ventana():
         miEdad=StringVar()
         miFecha=StringVar()
         def conexionBBDD():
-            miConexion = sqlite3.connect("Gatos.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 miCursor.execute("""CREATE TABLE gato(ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -413,7 +413,7 @@ def segunda_ventana():
             except:
                 messagebox.showinfo("CONEXION", "Conexión exitosa con la BBDD")
         def eliminarBBDD():
-            miConexion = sqlite3.connect("Gatos.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             if messagebox.askyesno(mensaje = "¿Los Datos se perderán definitivamente, Desea continuar: ?", title="ADVERTENCIA"):
                 miCursor.execute("DROP TABLE gato")
@@ -443,7 +443,7 @@ def segunda_ventana():
             """
             messagebox.showinfo(title="INFORMACION", message= acerca)
         def crear():
-            miConexion = sqlite3.connect("Gatos.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
@@ -455,7 +455,7 @@ def segunda_ventana():
             mostrar()
 
         def mostrar():
-            miConexion = sqlite3.connect("Gatos.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             registros = tree.get_children()
             for elemento in registros:
@@ -492,7 +492,7 @@ def segunda_ventana():
         #Funciones 2ª
 
         def actualizar():
-            miConexion = sqlite3.connect("Gatos.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
@@ -504,7 +504,7 @@ def segunda_ventana():
             limpiarCampos()
             mostrar()
         def borrar():
-            miConexion = sqlite3.connect("Gatos.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 if messagebox.askyesno(message="¿Realmente desea eliminar el registro?", title="ADVERTENCIA"):
@@ -610,7 +610,7 @@ def segunda_ventana():
         miMotivo=StringVar()
         miFecha=StringVar()
         def conexionBBDD():
-            miConexion = sqlite3.connect("Visita.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 miCursor.execute("""CREATE TABLE visita(ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -624,7 +624,7 @@ def segunda_ventana():
             except:
                 messagebox.showinfo("CONEXION", "Conexión exitosa con la BBDD")
         def eliminarBBDD():
-            miConexion = sqlite3.connect("Visita.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             if messagebox.askyesno(mensaje = "¿Los Datos se perderán definitivamente, Desea continuar: ?", title="ADVERTENCIA"):
                 miCursor.execute("DROP TABLE visita")
@@ -632,12 +632,14 @@ def segunda_ventana():
                 pass
                 limpiarCampos()
                 mostrar()
+
         def salirAplicacion():
             valor = messagebox.askquestion("Salir","¿Estás seguro que deseas salir? ")
             if valor == "yes":
                 visita.destroy()
                 ventana_dos.destroy()
                 root.destroy()
+
         def limpiarCampos():
             miId.set("")
             miNombre.set("")
@@ -646,6 +648,7 @@ def segunda_ventana():
             miResidencia.set("")
             miMotivo.set("")
             miFecha.set("")
+
         def mensaje():
             acerca=""" 
             Aplicación CRUD
@@ -653,8 +656,9 @@ def segunda_ventana():
             Tecnología Python Tkinter    
             """
             messagebox.showinfo(title="INFORMACION", message= acerca)
+
         def crear():
-            miConexion = sqlite3.connect("Visita.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 datos = miNombre.get(),miApellidos.get(),miDNI.get(),miResidencia.get(),miMotivo.get(),miFecha.get()
@@ -666,7 +670,7 @@ def segunda_ventana():
             mostrar()
 
         def mostrar():
-            miConexion = sqlite3.connect("Visita.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             registros = tree.get_children()
             for elemento in registros:
@@ -703,7 +707,7 @@ def segunda_ventana():
         #Funciones 2ª
 
         def actualizar():
-            miConexion = sqlite3.connect("Visita.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 datos = miNombre.get(),miApellidos.get(),miDNI.get(),miResidencia.get(),miMotivo.get(),miFecha.get()
@@ -714,8 +718,9 @@ def segunda_ventana():
                 pass
             limpiarCampos()
             mostrar()
+
         def borrar():
-            miConexion = sqlite3.connect("Visita.db")
+            miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
                 if messagebox.askyesno(message="¿Realmente desea eliminar el registro?", title="ADVERTENCIA"):
@@ -749,6 +754,19 @@ def segunda_ventana():
         atrasmenu = Menu(menubar, tearoff=0)
         atrasmenu.add_command(label="Pagina anterior", command=pagina_anterior)
         menubar.add_cascade(label="Páginas anterior", menu= atrasmenu)
+
+        def actualizar():
+            miConexion = sqlite3.connect("Protectora.db")
+            miCursor= miConexion.cursor()
+            try:
+                datos = miNombre.get(),miApellidos.get(),miDNI.get(),miResidencia.get(),miMotivo.get(),miFecha.get()
+                miCursor.execute("UPDATE visita SET NOMBRE = ?, APELLIDOS = ?, DNI = ?, RESIDENCIA = ?, MOTIVO = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos))
+                miConexion.commit()
+            except:
+                messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al actualizar el resgistro")
+                pass
+            limpiarCampos()
+            mostrar()
         ############################################################################################################################################################
         ############################################################################################################################################################
         #########################################################  C A L E N D A R I O ###############################################################################################
@@ -814,6 +832,255 @@ def segunda_ventana():
         visita.config(menu=menubar)
         visita.mainloop()
 
+    #****************************************************** VENTANA ADOPCION  ******************************************************************************************
+    #************************************************* SEXTA  PANTALLA PRINCIPAL ******************************************************************************************
+    #********************************************************************************************************************************************************************
+    def registro_adopcion():
+        root.iconify()
+        ventana_dos.destroy()
+        adopcion = Toplevel()
+        adopcion.geometry("5000x5000")
+        adopcion.title("Registro de adopciones")
+        miId=StringVar()
+        miNombre= StringVar()
+        miApellidos=StringVar()
+        miDNI =StringVar()
+        miResidencia=StringVar()
+        adopta=StringVar()
+        miFecha=StringVar()
+        #Funciones
+        def conexionBBDD():
+            miConexion = sqlite3.connect("Protectora.db")
+            miCursor= miConexion.cursor()
+            try:
+                miCursor.execute("""CREATE TABLE adopta(ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                NOMBRE VARCHAR(50) NOT NULL, 
+                APELLIDOS VARCHAR(50) NOT NULL, 
+                DNI VARCHAR(50) NOT NULL, 
+                RESIDENCIA VARCHAR(50) NOT NULL, 
+                ADOPTA VARCHAR(50) NOT NULL, 
+                FECHA VARCHAR(50) NOT NULL)""")
+                messagebox.showinfo("CONEXION", "Base de Datos Creada Exitosamente")
+            except:
+                messagebox.showinfo("CONEXION", "Conexión exitosa con la BBDD")
+
+        def eliminarBBDD():
+            miConexion = sqlite3.connect("Protectora.db")
+            miCursor= miConexion.cursor()
+            if messagebox.askyesno(mensaje = "¿Los Datos se perderán definitivamente, Desea continuar: ?", title="ADVERTENCIA"):
+                miCursor.execute("DROP TABLE adopta")
+            else:
+                pass
+                limpiarCampos()
+                mostrar()
+        def salirAplicacion():
+            valor = messagebox.askquestion("Salir","¿Estás seguro que deseas salir? ")
+            if valor == "yes":
+                adopcion.destroy()
+                ventana_dos.destroy()
+                root.destroy()
+
+        def limpiarCampos():
+            miId.set("")
+            miNombre.set("")
+            miApellidos.set("")
+            miDNI.set("")
+            miResidencia.set("")
+            adopta.set("")
+            miFecha.set("")
+
+        def mensaje():
+            acerca=""" 
+            Aplicación CRUD
+            Versión 1.0
+            Tecnología Python Tkinter    
+            """
+            messagebox.showinfo(title="INFORMACION", message= acerca)
+#øøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøø
+#øøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøø
+#øøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøø
+        def crear():
+            miConexion = sqlite3.connect("Protectora.db")
+            b= sqlite3.connect("Perros.db")
+            miCursor= miConexion.cursor()
+            cur= b.cursor()
+            
+            try:
+                datos = miNombre.get(),miApellidos.get(),miDNI.get(),miResidencia.get(),adopta.get(),miFecha.get()
+                miCursor.execute("INSERT INTO adopta VALUES(NULL,?,?,?,?,?,?)", (datos))
+                miConexion.commit()
+                try:
+                    "DELETE FROM adopta WHERE EXISTS (SELECT ID FROM perro WHERE Aadopta.miNombre = perro.miNombre)"
+                except:
+                    messagebox.showinfo("ADVERTENCIA", "NO SE HA PODIDO HACER LA ACCIÓN")
+
+            except:
+                messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
+            limpiarCampos()
+            mostrar()
+
+        def mostrar():
+            miConexion = sqlite3.connect("Protectora.db")
+            miCursor= miConexion.cursor()
+            registros = tree.get_children()
+            for elemento in registros:
+                tree.delete(elemento)
+            try:
+                miCursor.execute("SELECT * FROM adopta")
+                for row in miCursor:
+                    tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6]))
+            except:
+                pass
+
+        
+        #Tabla
+        tree = ttk.Treeview(adopcion,height=10, columns=("#0", "#1", "#2","#3","#4","#5"))
+        tree.place(x=0, y=130)
+        tree.column("#0",width = 75)#Darles tamaños a las columnas
+        #Cabeceras de la tabla
+        tree.heading("#0", text= "ID",anchor= CENTER)
+        tree.heading("#1", text= "Nombre", anchor= CENTER)
+        tree.heading("#2", text= "Apellidos", anchor= CENTER)
+        tree.heading("#3", text= "DNI", anchor= CENTER)
+        tree.column("#3",width = 100)
+        tree.heading("#4", text= "Residencia", anchor= CENTER)
+        tree.heading("#5", text= "Protectora", anchor= CENTER)
+        tree.heading("#6", text= "Fecha de registro", anchor= CENTER)
+        def seleccionarUsandoClic(event):
+            item= tree.identify("item", event.x,event.y)
+            miId.set(tree.item(item,"text"))
+            miNombre.set(tree.item(item,"values")[0])
+            miApellidos.set(tree.item(item,"values")[1])
+            miDNI.set(tree.item(item,"values")[2])
+            miResidencia.set(tree.item(item,"values")[3])
+            adopta.set(tree.item(item,"values")[4])
+            miFecha.set(tree.item(item,"values")[5])
+        tree.bind("<Double-1>", seleccionarUsandoClic)
+
+        def pagina_anterior():
+            segunda_ventana()
+
+        menubar = Menu(adopcion)
+        menubasedat= Menu(menubar, tearoff=0)
+        menubasedat.add_command(label="Crear/Conectar BBDD", command=conexionBBDD)
+        menubasedat.add_command(label="Eliminar BBDD", command=eliminarBBDD)
+        menubasedat.add_command(label="Salir",command= salirAplicacion)
+        menubar.add_cascade(label="Inicio", menu= menubasedat)
+        adopcion.config(menu=menubar)
+
+        #Segundo menú AYUDA
+        ayudamenu= Menu(menubar, tearoff=0)
+        ayudamenu.add_command(label="Resetear Campos", command=limpiarCampos)
+        ayudamenu.add_command(label="Acerca", command=mensaje)
+        menubar.add_cascade(label="Ayuda", menu= ayudamenu)
+
+        atrasmenu = Menu(menubar, tearoff=0)
+        atrasmenu.add_command(label="Pagina anterior", command=pagina_anterior)
+        menubar.add_cascade(label="Páginas anterior", menu= atrasmenu)
+
+        def actualizar():
+            miConexion = sqlite3.connect("Protectora.db")
+            miCursor= miConexion.cursor()
+            try:
+                datos = miNombre.get(),miApellidos.get(),miDNI.get(),miResidencia.get(),adopta.get(),miFecha.get()
+                miCursor.execute("UPDATE adopta SET NOMBRE = ?, APELLIDOS = ?, DNI = ?, RESIDENCIA = ?, ADOPTA = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos))
+                miConexion.commit()
+            except:
+                messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al actualizar el resgistro")
+                pass
+            limpiarCampos()
+            mostrar()
+        def borrar():
+            miConexion = sqlite3.connect("Protectora.db")
+            miCursor= miConexion.cursor()
+            try:
+                if messagebox.askyesno(message="¿Realmente desea eliminar el registro?", title="ADVERTENCIA"):
+                    miCursor.execute("DELETE FROM adopta WHERE ID =" + miId.get())
+                    miConexion.commit()
+            except:
+                messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al intentar eliminar el registro")
+            limpiarCampos()
+            mostrar()
+
+        ############################################################################################################################################################
+        ############################################################################################################################################################
+        #########################################################  C A L E N D A R I O ###############################################################################################
+        ############################################################################################################################################################
+        ############################################################################################################################################################
+        #CALENDARIO
+        cal = Calendar(adopcion, selectmode = 'day',year = 2021, month = 4,day = 23)
+        cal.place(x=1200, y = 150)
+        
+        def grad_date():
+            date.config(text = "Día de la cita: " + cal.get_date() )
+            miFecha.set(cal.get_date())
+            miFecha.get()
+        B=Button(adopcion, text = "Calendario para gestionar citas",command = grad_date)
+        B.place(x=1200, y = 300)
+        date = Label(adopcion, text = "")
+        date.pack(pady = 20)
+
+        
+        ####################################################################################################################################
+        #Etiquetas y cajas de texto
+        e1= Entry(adopcion, textvariable=miId)
+
+        l2= Label(adopcion, text="Nombre")
+        l2.place(x=50, y=10)
+        e2=Entry(adopcion, textvariable=miNombre)
+        e2.place(x=110, y= 10)
+
+        l3= Label(adopcion, text="Apellidos")
+        l3.place(x=50, y=40)
+        e3=Entry(adopcion, textvariable=miApellidos)
+        e3.place(x=110, y= 40)
+
+        l4= Label(adopcion, text="D N I")
+        l4.place(x=50, y=80)
+        l4=Entry(adopcion, textvariable=miDNI)
+        l4.place(x=110, y= 80)
+
+        l5= Label(adopcion, text="Residencia")
+        l5.place(x=350, y=80)
+        l5=Entry(adopcion, textvariable=miResidencia)
+        l5.place(x=475, y= 80)
+
+        l5= Label(adopcion, text="Adopta")
+        l5.place(x=350, y=40)
+        l5=Entry(adopcion, textvariable=adopta)
+        l5.place(x=475, y= 40)
+
+        l5= Label(adopcion, text="Fecha de Registro")
+        l5.place(x=350, y=10)
+        l5=Entry(adopcion, textvariable=miFecha)
+        l5.place(x=475, y= 10)
+        #Botones
+        b1=Button(adopcion, text="Crea Registro",command= crear)
+        b1.place(x=0, y= 400)
+        b2=Button(adopcion, text="Modificar registro",command= actualizar)
+        b2.place(x=120, y= 400)
+        b3=Button(adopcion, text="Mostrar Lista", command= mostrar)
+        b3.place(x=270, y= 400)
+        b4=Button(adopcion, text="Eliminar Registro",command= borrar)
+        b4.place(x=390, y= 400)
+        b4.config(bg="red")
+
+
+
+
+        adopcion.mainloop()
+
+
+
+
+
+
+
+
+    #####################################################################################################################################################################
+    #####################################################################################################################################################################
+    #####################################################################################################################################################################
+    ################################################################## RESTO DE LA VENTANA PRINCIPAL ####################################################################
     #IMAGENES*************************************
     #Perro 
     imagen = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/Perro 2.png")
@@ -823,7 +1090,7 @@ def segunda_ventana():
     perros.place(x=600, y= 300)
     perros.config(overrelief=GROOVE, relief=FLAT)
 
-    #Visitas
+    #Protectoras
     imagen4 = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/casa2.png")
     Imagen_V =Label(ventana_dos, image=imagen4)
     Imagen_V.place(x=1340, y=600)
@@ -831,7 +1098,7 @@ def segunda_ventana():
     visitas.place(x=1100, y= 600)
     visitas.config(overrelief=GROOVE, relief=FLAT)
 
-    #Adopcion
+    #Protectora
     imagen3 = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/family 2.png")
     Imagen_A =Label(ventana_dos, image=imagen3)
     Imagen_A.place(x=1340, y=300)
