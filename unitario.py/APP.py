@@ -179,7 +179,7 @@ def segunda_ventana():
         perro.title("Registro de nuevo perro")
         ############################################## COMENZAMOS LA BBDD Y REGISTROS ###########################################################
         miId=StringVar()
-        miNombre= StringVar()
+        miNombre_Perro= StringVar()
         miChip=StringVar()
         miLugar =StringVar()
         miRaza =StringVar()
@@ -191,7 +191,7 @@ def segunda_ventana():
             miCursor= miConexion.cursor()
             try:
                 miCursor.execute("""CREATE TABLE perro(ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                NOMBRE VARCHAR(50) NOT NULL, 
+                NOMBRE_PERRO VARCHAR(50) NOT NULL, 
                 CHIP VARCHAR(50) NOT NULL, 
                 LUGAR VARCHAR(50) NOT NULL, 
                 RAZA VARCHAR(50) NOT NULL, 
@@ -217,7 +217,7 @@ def segunda_ventana():
                 root.destroy()
         def limpiarCampos():
             miId.set("")
-            miNombre.set("")
+            miNombre_Perro.set("")
             miChip.set("")
             miLugar.set("")
             miRaza.set("")
@@ -234,13 +234,15 @@ def segunda_ventana():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
-                datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
-                miCursor.execute("INSERT INTO perro VALUES(NULL,?,?,?,?,?,?)", (datos))
+                datos_perro = miNombre_Perro.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
+                miCursor.execute("INSERT INTO perro VALUES(NULL,?,?,?,?,?,?)", (datos_perro))
                 miConexion.commit()
             except:
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
             limpiarCampos()
             mostrar()
+
+        
 
         def mostrar():
             miConexion = sqlite3.connect("Protectora.db")
@@ -270,7 +272,7 @@ def segunda_ventana():
         def seleccionarUsandoClic(event):
             item= tree.identify("item", event.x,event.y)
             miId.set(tree.item(item,"text"))
-            miNombre.set(tree.item(item,"values")[0])
+            miNombre_Perro.set(tree.item(item,"values")[0])
             miChip.set(tree.item(item,"values")[1])
             miLugar.set(tree.item(item,"values")[2])
             miRaza.set(tree.item(item,"values")[3])
@@ -283,8 +285,8 @@ def segunda_ventana():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
-                datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
-                miCursor.execute("UPDATE perro SET NOMBRE = ?, CHIP = ?, LUGAR = ?, RAZA = ?, EDAD = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos))
+                datos_perro = miNombre_Perro.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
+                miCursor.execute("UPDATE perro SET NOMBRE_PERRO = ?, CHIP = ?, LUGAR = ?, RAZA = ?, EDAD = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos_perro))
                 miConexion.commit()
             except:
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al actualizar el resgistro")
@@ -336,7 +338,7 @@ def segunda_ventana():
 
         l2= Label(perro, text="Nombre")
         l2.place(x=50, y=10)
-        e2=Entry(perro, textvariable=miNombre)
+        e2=Entry(perro, textvariable=miNombre_Perro)
         e2.place(x=110, y= 10)
 
         l3= Label(perro, text="Chip")
@@ -412,6 +414,7 @@ def segunda_ventana():
                 messagebox.showinfo("CONEXION", "Base de Datos Creada Exitosamente")
             except:
                 messagebox.showinfo("CONEXION", "Conexión exitosa con la BBDD")
+
         def eliminarBBDD():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
@@ -852,13 +855,14 @@ def segunda_ventana():
         def conexionBBDD():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
+            
             try:
                 miCursor.execute("""CREATE TABLE adopta(ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 NOMBRE VARCHAR(50) NOT NULL, 
                 APELLIDOS VARCHAR(50) NOT NULL, 
                 DNI VARCHAR(50) NOT NULL, 
-                RESIDENCIA VARCHAR(50) NOT NULL, 
-                ADOPTA VARCHAR(50) NOT NULL, 
+                RESIDENCIA VARCHAR(50) NOT NULL,
+                CHIP VARCHAR(50) NOT NULL, 
                 FECHA VARCHAR(50) NOT NULL)""")
                 messagebox.showinfo("CONEXION", "Base de Datos Creada Exitosamente")
             except:
@@ -871,8 +875,8 @@ def segunda_ventana():
                 miCursor.execute("DROP TABLE adopta")
             else:
                 pass
-                limpiarCampos()
-                mostrar()
+            limpiarCampos()
+            mostrar()
         def salirAplicacion():
             valor = messagebox.askquestion("Salir","¿Estás seguro que deseas salir? ")
             if valor == "yes":
@@ -901,23 +905,39 @@ def segunda_ventana():
 #øøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøøø
         def crear():
             miConexion = sqlite3.connect("Protectora.db")
-            b= sqlite3.connect("Perros.db")
             miCursor= miConexion.cursor()
-            cur= b.cursor()
-            
             try:
                 datos = miNombre.get(),miApellidos.get(),miDNI.get(),miResidencia.get(),adopta.get(),miFecha.get()
                 miCursor.execute("INSERT INTO adopta VALUES(NULL,?,?,?,?,?,?)", (datos))
+                #miCursor.execute("DELETE FROM perro WHERE ID = " + adopta.get())
+                completar_Adopcion()
                 miConexion.commit()
-                try:
-                    "DELETE FROM adopta WHERE EXISTS (SELECT ID FROM perro WHERE Aadopta.miNombre = perro.miNombre)"
-                except:
-                    messagebox.showinfo("ADVERTENCIA", "NO SE HA PODIDO HACER LA ACCIÓN")
-
+                
+                
+                
             except:
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
             limpiarCampos()
             mostrar()
+            
+
+        
+        def completar_Adopcion():
+            miConexion = sqlite3.connect("Protectora.db")
+            miCursor= miConexion.cursor()
+            try:
+                #prueba = miCursor.execute("SELECT * FROM perro WHERE CHIP = " + adopta.get())
+                prueba = miCursor.execute("SELECT NOMBRE_PERRO, CHIP, RAZA FROM perro WHERE CHIP = " + adopta.get())
+                usuario = prueba.fetchone()
+                print(usuario)
+                """for i in usuario:
+                    t= i.split(" ")
+                    resultados_adopcion.insert("",0, text=i[0], values=i[0])"""
+                    
+                messagebox.showinfo("IMPRIMIDO CON ÉXITO", "LA CONSULTA SE HA REALIZADO CON ÉXITO")
+            except:
+                messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
+            
 
         def mostrar():
             miConexion = sqlite3.connect("Protectora.db")
@@ -929,10 +949,17 @@ def segunda_ventana():
                 miCursor.execute("SELECT * FROM adopta")
                 for row in miCursor:
                     tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6]))
+                    
             except:
                 pass
 
-        
+       
+        ############################################################################################################################################################
+        ############################################################################################################################################################
+        #########################################################  ÁRBOLES / TREE ###############################################################################################
+        #########################################################     ADOPCION   ###################################################################################################
+        ############################################################################################################################################################
+
         #Tabla
         tree = ttk.Treeview(adopcion,height=10, columns=("#0", "#1", "#2","#3","#4","#5"))
         tree.place(x=0, y=130)
@@ -944,8 +971,34 @@ def segunda_ventana():
         tree.heading("#3", text= "DNI", anchor= CENTER)
         tree.column("#3",width = 100)
         tree.heading("#4", text= "Residencia", anchor= CENTER)
-        tree.heading("#5", text= "Protectora", anchor= CENTER)
+        tree.heading("#5", text= "Chip", anchor= CENTER)
         tree.heading("#6", text= "Fecha de registro", anchor= CENTER)
+
+
+
+        """ Esta segunda tabla es para la ventana de adopciones.
+        El objetivo es que en ella se muestre el registro recien creado del adoptante, y que también 
+        se muestre tres columnas de una consulta sobre el animal adoptado.
+        Se busca por el número de chip. """        
+
+        # Segunda tabla 
+        resultados_adopcion= ttk.Treeview(adopcion,height=10, columns=("#0", "#1", "#2","#3","#4","#5"))
+        resultados_adopcion.place(x=0, y=500)
+        #Cabeceras de la tabla
+        resultados_adopcion.heading("#0", text= "ID",anchor= CENTER)
+        resultados_adopcion.heading("#1", text= "Nombre de adoptante", anchor= CENTER)
+        resultados_adopcion.heading("#2", text= "Apellidos", anchor= CENTER)
+        resultados_adopcion.heading("#3", text= "DNI", anchor= CENTER)
+        resultados_adopcion.column("#3",width = 100)
+        resultados_adopcion.heading("#4", text= "Nombre animal", anchor= CENTER)
+        resultados_adopcion.heading("#5", text= "Chip", anchor= CENTER)
+        resultados_adopcion.heading("#6", text= "Raza", anchor= CENTER)
+
+
+
+
+
+
         def seleccionarUsandoClic(event):
             item= tree.identify("item", event.x,event.y)
             miId.set(tree.item(item,"text"))
@@ -990,6 +1043,7 @@ def segunda_ventana():
                 pass
             limpiarCampos()
             mostrar()
+
         def borrar():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
@@ -1001,7 +1055,10 @@ def segunda_ventana():
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al intentar eliminar el registro")
             limpiarCampos()
             mostrar()
+        
+       
 
+        
         ############################################################################################################################################################
         ############################################################################################################################################################
         #########################################################  C A L E N D A R I O ###############################################################################################
@@ -1019,7 +1076,11 @@ def segunda_ventana():
         B.place(x=1200, y = 300)
         date = Label(adopcion, text = "")
         date.pack(pady = 20)
-
+        ############################################################################################################################################################
+        ############################################################################################################################################################
+        #########################################################  TABLA QUE MUESTRE ADOPTANTE ###############################################################################################
+        ##################################################################  ADOPTADO  #######################################################################
+        ############################################################################################################################################################
         
         ####################################################################################################################################
         #Etiquetas y cajas de texto
@@ -1066,7 +1127,7 @@ def segunda_ventana():
         b4.config(bg="red")
 
 
-
+        
 
         adopcion.mainloop()
 
@@ -1141,31 +1202,6 @@ def segunda_ventana():
     
 
     ventana_dos.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 root.mainloop()
