@@ -919,10 +919,7 @@ def segunda_ventana():
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
             limpiarCampos()
             mostrar()
-<<<<<<< HEAD
-=======
-                    
->>>>>>> f16422f87252400e360fc0c1edbea705bc8cab11
+
         def mostrar():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
@@ -934,15 +931,12 @@ def segunda_ventana():
                 miCursor.execute("SELECT * FROM adopta")
                 for row in miCursor:
                     tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6]))
-<<<<<<< HEAD
                     completar_Adopcion()
-=======
-                completar_Adopcion()
->>>>>>> f16422f87252400e360fc0c1edbea705bc8cab11
+                    
             except:
                 pass
 
-       
+      
         ############################################################################################################################################################
         ############################################################################################################################################################
         #########################################################  ÁRBOLES / TREE ###############################################################################################
@@ -988,9 +982,12 @@ def segunda_ventana():
                 usuario = prueba.fetchall() 
                 for row in usuario: 
                     resultados_adopcion.insert("",END, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6])) 
+                    
                     #messagebox.showinfo("IMPRIMIDO CON ÉXITO", "LA CONSULTA SE HA REALIZADO CON ÉXITO") 
             except Exception as e: 
                 messagebox.showinfo("ADVERTENCIA", e)
+            miCursor.close()
+
 
         def seleccionarUsandoClic(event):
             item= tree.identify("item", event.x,event.y)
