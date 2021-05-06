@@ -919,26 +919,7 @@ def segunda_ventana():
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
             limpiarCampos()
             mostrar()
-            
-
-        
-        def completar_Adopcion():
-            miConexion = sqlite3.connect("Protectora.db")
-            miCursor= miConexion.cursor()
-            try:
-                #prueba = miCursor.execute("SELECT * FROM perro WHERE CHIP = " + adopta.get())
-                prueba = miCursor.execute("SELECT NOMBRE_PERRO, CHIP, RAZA FROM perro WHERE CHIP = " + adopta.get())
-                usuario = prueba.fetchone()
-                print(usuario)
-                """for i in usuario:
-                    t= i.split(" ")
-                    resultados_adopcion.insert("",0, text=i[0], values=i[0])"""
                     
-                messagebox.showinfo("IMPRIMIDO CON ÉXITO", "LA CONSULTA SE HA REALIZADO CON ÉXITO")
-            except:
-                messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
-            
-
         def mostrar():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
@@ -949,7 +930,7 @@ def segunda_ventana():
                 miCursor.execute("SELECT * FROM adopta")
                 for row in miCursor:
                     tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6]))
-                    
+                completar_Adopcion()
             except:
                 pass
 
@@ -995,9 +976,18 @@ def segunda_ventana():
         resultados_adopcion.heading("#6", text= "Raza", anchor= CENTER)
 
 
-
-
-
+        def completar_Adopcion(): 
+            miConexion = sqlite3.connect("Protectora.db") 
+            miCursor= miConexion.cursor() 
+            try: 
+                prueba = miCursor.execute("SELECT adopta.ID, adopta.NOMBRE, adopta.APELLIDOS, adopta.DNI, perro.NOMBRE_PERRO, perro.CHIP, perro.RAZA FROM adopta LEFT JOIN perro ON perro.CHIP=adopta.CHIP") 
+                usuario = prueba.fetchall() 
+                for row in usuario: 
+                    resultados_adopcion.insert("",END, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6])) 
+                    messagebox.showinfo("IMPRIMIDO CON ÉXITO", "LA CONSULTA SE HA REALIZADO CON ÉXITO") 
+            except Exception as e: 
+                messagebox.showinfo("ADVERTENCIA", e)
+                
 
         def seleccionarUsandoClic(event):
             item= tree.identify("item", event.x,event.y)
