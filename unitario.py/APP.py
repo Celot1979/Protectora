@@ -919,7 +919,6 @@ def segunda_ventana():
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
             limpiarCampos()
             mostrar()
-
         def mostrar():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
