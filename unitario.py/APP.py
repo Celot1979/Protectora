@@ -16,7 +16,7 @@ root.geometry("5000x5000")
 root.title("PALEVLAS")
 #***************************************** IMAGEN CENTRAL DE LA PROTECTORA ******************************************************************************************
 #********************************************************************************************************************************************************************
-imagen = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/Proctetora.png")
+imagen = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Proctetora.png")
 Imagen_2 =Label(root, image=imagen)
 Imagen_2.place(x=650, y=220)
 #***************************************** ETIQUETAS-CUADROS DE TEXTO-VARIABLES  ******************************************************************************************
@@ -919,25 +919,6 @@ def segunda_ventana():
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
             limpiarCampos()
             mostrar()
-            
-
-        
-        def completar_Adopcion():
-            miConexion = sqlite3.connect("Protectora.db")
-            miCursor= miConexion.cursor()
-            try:
-                #prueba = miCursor.execute("SELECT * FROM perro WHERE CHIP = " + adopta.get())
-                prueba = miCursor.execute("SELECT NOMBRE_PERRO, CHIP, RAZA FROM perro WHERE CHIP = " + adopta.get())
-                usuario = prueba.fetchone()
-                print(usuario)
-                """for i in usuario:
-                    t= i.split(" ")
-                    resultados_adopcion.insert("",0, text=i[0], values=i[0])"""
-                    
-                messagebox.showinfo("IMPRIMIDO CON ÉXITO", "LA CONSULTA SE HA REALIZADO CON ÉXITO")
-            except:
-                messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
-            
 
         def mostrar():
             miConexion = sqlite3.connect("Protectora.db")
@@ -945,11 +926,12 @@ def segunda_ventana():
             registros = tree.get_children()
             for elemento in registros:
                 tree.delete(elemento)
+            
             try:
                 miCursor.execute("SELECT * FROM adopta")
                 for row in miCursor:
                     tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6]))
-                    
+                    completar_Adopcion()
             except:
                 pass
 
@@ -976,10 +958,7 @@ def segunda_ventana():
 
 
 
-        """ Esta segunda tabla es para la ventana de adopciones.
-        El objetivo es que en ella se muestre el registro recien creado del adoptante, y que también 
-        se muestre tres columnas de una consulta sobre el animal adoptado.
-        Se busca por el número de chip. """        
+
 
         # Segunda tabla 
         resultados_adopcion= ttk.Treeview(adopcion,height=10, columns=("#0", "#1", "#2","#3","#4","#5"))
@@ -994,10 +973,17 @@ def segunda_ventana():
         resultados_adopcion.heading("#5", text= "Chip", anchor= CENTER)
         resultados_adopcion.heading("#6", text= "Raza", anchor= CENTER)
 
-
-
-
-
+        def completar_Adopcion(): 
+            miConexion = sqlite3.connect("Protectora.db") 
+            miCursor= miConexion.cursor() 
+            try:
+                prueba = miCursor.execute("SELECT adopta.ID, adopta.NOMBRE, adopta.APELLIDOS, adopta.DNI, perro.NOMBRE_PERRO, perro.CHIP, perro.RAZA FROM adopta LEFT JOIN perro ON perro.CHIP=adopta.CHIP") 
+                usuario = prueba.fetchall() 
+                for row in usuario: 
+                    resultados_adopcion.insert("",END, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6])) 
+                    #messagebox.showinfo("IMPRIMIDO CON ÉXITO", "LA CONSULTA SE HA REALIZADO CON ÉXITO") 
+            except Exception as e: 
+                messagebox.showinfo("ADVERTENCIA", e)
 
         def seleccionarUsandoClic(event):
             item= tree.identify("item", event.x,event.y)
@@ -1144,7 +1130,7 @@ def segunda_ventana():
     ################################################################## RESTO DE LA VENTANA PRINCIPAL ####################################################################
     #IMAGENES*************************************
     #Perro 
-    imagen = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/Perro 2.png")
+    imagen = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Perro 2.png") 
     Imagen_P =Label(ventana_dos, image=imagen)
     Imagen_P.place(x=840, y=300)
     perros = Button(ventana_dos, text="Entrada de Perros", width=20, height=6,background="blue", activebackground="blue",command=ingreso_perro )
@@ -1152,7 +1138,7 @@ def segunda_ventana():
     perros.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectoras
-    imagen4 = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/casa2.png")
+    imagen4 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/casa2.png")
     Imagen_V =Label(ventana_dos, image=imagen4)
     Imagen_V.place(x=1340, y=600)
     visitas= Button(ventana_dos, text="Visitas", width=20, height=6,background="blue", activebackground="blue",command=ingreso_visitas)
@@ -1160,14 +1146,14 @@ def segunda_ventana():
     visitas.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectora
-    imagen3 = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/family 2.png")
+    imagen3 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/family 2.png")
     Imagen_A =Label(ventana_dos, image=imagen3)
     Imagen_A.place(x=1340, y=300)
     Adoptar= Button(ventana_dos, text="Adoptantes", width=20, height=6,background="blue", activebackground="blue", command= ingreso_adopcion)
     Adoptar.place(x=1100, y= 300)
     Adoptar.config(overrelief=GROOVE, relief=FLAT)
     #Gato
-    imagen2 = PhotoImage(file="/Users/danielgil/Desktop/Curso_Python/Gato 2.png")
+    imagen2 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Gato 2.png")
     Imagen_G =Label(ventana_dos, image=imagen2)
     Imagen_G.place(x=840, y=600)
     gatos = Button(ventana_dos, text="Entrada de gatos", width=20, height=6,background="blue", activebackground="blue",command=ingreso_gato )
