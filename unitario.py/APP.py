@@ -984,12 +984,10 @@ def segunda_ventana():
             miConexion = sqlite3.connect("Protectora.db") 
             miCursor= miConexion.cursor() 
             try:
-                prueba = miCursor.execute("SELECT adopta.ID, adopta.NOMBRE, adopta.APELLIDOS, adopta.DNI, perro.NOMBRE_PERRO, perro.CHIP, perro.RAZA FROM adopta LEFT JOIN perro ON perro.CHIP=adopta.CHIP WHERE perro.CHIP is not null") 
-
+                prueba = miCursor.execute("SELECT  adopta.ID, adopta.NOMBRE, adopta.APELLIDOS, adopta.DNI, perro.NOMBRE_PERRO, perro.CHIP, perro.RAZA FROM adopta LEFT JOIN perro ON perro.CHIP=adopta.CHIP WHERE perro.CHIP is not null ") 
                 usuario = prueba.fetchall() 
-                
                 for row in usuario: 
-                    resultados_adopcion.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6])) 
+                    resultados_adopcion.insert("",END, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6])) 
                     
                     
                     #messagebox.showinfo("IMPRIMIDO CON ÉXITO", "LA CONSULTA SE HA REALIZADO CON ÉXITO") 
