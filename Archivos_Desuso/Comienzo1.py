@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter import ttk
 import sqlite3
 from segunda_ventana2 import*
-from perro3 import*
+
 
 #***************************************** VENTANA PRINCIPAL  ******************************************************************************************
 #****************************************  PANTALLA PRINCIPAL ******************************************************************************************

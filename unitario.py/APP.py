@@ -13,6 +13,7 @@ from tkcalendar import Calendar
 #********************************************************************************************************************************************************************
 root= Tk()
 root.geometry("5000x5000")
+
 root.title("PALEVLAS")
 #***************************************** IMAGEN CENTRAL DE LA PROTECTORA ******************************************************************************************
 #********************************************************************************************************************************************************************
@@ -119,19 +120,19 @@ def inicio_usario():
 
 #Botones pantalla principal************************************
 #Aceptar******
-conecto = Button(root, text="Conectar", width= 8, background="blue", activebackground="blue", command= inicio_usario)
+conecto = Button(root, text="Conectar", width= 8, command= inicio_usario)
 conecto.place(x=600, y=200)
 conecto.config(overrelief=GROOVE, relief=FLAT)
 #Borrar*****
-borrar= Button(root, text="BORRAR", width= 8, background="blue", activebackground="blue", command=borrar)
+borrar= Button(root, text="BORRAR", width= 8, command=borrar)
 borrar.place(x=800, y=200)
 borrar.config(overrelief=GROOVE, relief=FLAT)
 #Salir*****
-salir= Button(root, text="SALIR", width= 8, background="blue", activebackground="blue", command=salir)
+salir= Button(root, text="SALIR", width= 8, command=salir)
 salir.place(x=1000, y=200)
 salir.config(overrelief=GROOVE, relief=FLAT)
 
-registrar= Button(root, text="Registrar nuevo usuario", width= 15, background="blue", activebackground="blue",command=registrar_nuevo)
+registrar= Button(root, text="Registrar nuevo usuario", width= 15,command=registrar_nuevo)
 registrar.place(x=1200, y=200)
 registrar.config(overrelief=GROOVE, relief=FLAT)
 #***************************************** VENTANA DE OPCIONES  ******************************************************************************************
@@ -786,7 +787,7 @@ def segunda_ventana():
         B=Button(visita, text = "Calendario para gestionar citas",command = grad_date)
         B.place(x=1200, y = 300)
         date = Label(visita, text = "")
-        date.pack(pady = 20)
+        date.pack(pady = 40)
         ####################################################################################################################################
         #Etiquetas y cajas de texto
         e1= Entry(visita, textvariable=miId)
@@ -1143,32 +1144,32 @@ def segunda_ventana():
     imagen = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Perro 2.png") 
     Imagen_P =Label(ventana_dos, image=imagen)
     Imagen_P.place(x=840, y=300)
-    perros = Button(ventana_dos, text="Entrada de Perros", width=20, height=6,background="blue", activebackground="blue",command=ingreso_perro )
+    perros = Button(ventana_dos, text="Entrada de Perros", width=20, height=6,command=ingreso_perro )
     perros.place(x=600, y= 300)
-    perros.config(overrelief=GROOVE, relief=FLAT)
+    #perros.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectoras
     imagen4 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/casa2.png")
     Imagen_V =Label(ventana_dos, image=imagen4)
     Imagen_V.place(x=1340, y=600)
-    visitas= Button(ventana_dos, text="Visitas", width=20, height=6,background="blue", activebackground="blue",command=ingreso_visitas)
+    visitas= Button(ventana_dos, text="Visitas", width=20, height=6,command=ingreso_visitas)
     visitas.place(x=1100, y= 600)
-    visitas.config(overrelief=GROOVE, relief=FLAT)
+    #visitas.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectora
     imagen3 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/family 2.png")
     Imagen_A =Label(ventana_dos, image=imagen3)
     Imagen_A.place(x=1340, y=300)
-    Adoptar= Button(ventana_dos, text="Adoptantes", width=20, height=6,background="blue", activebackground="blue", command= ingreso_adopcion)
+    Adoptar= Button(ventana_dos, text="Adoptantes", width=20, height=6, command= ingreso_adopcion)
     Adoptar.place(x=1100, y= 300)
-    Adoptar.config(overrelief=GROOVE, relief=FLAT)
+    #Adoptar.config(overrelief=GROOVE, relief=FLAT)
     #Gato
     imagen2 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Gato 2.png")
     Imagen_G =Label(ventana_dos, image=imagen2)
     Imagen_G.place(x=840, y=600)
-    gatos = Button(ventana_dos, text="Entrada de gatos", width=20, height=6,background="blue", activebackground="blue",command=ingreso_gato )
+    gatos = Button(ventana_dos, text="Entrada de gatos", width=20, height=6,command=ingreso_gato )
     gatos.place(x=600, y= 600)
-    gatos.config(overrelief=GROOVE, relief=FLAT)
+    #gatos.config(overrelief=GROOVE, relief=FLAT)
     #Menú segunda ventana para
     #funciones 
     def mensaje():
