@@ -17,9 +17,9 @@ def conexionBBDD_usuario():
         NOMBRE VARCHAR(50) NOT NULL, 
         PASSWORD VARCHAR(50) NOT NULL,
         FOTO BLOB NOT NULL)""")
-        messagebox.showinfo("USUARIO REGISTRADO", "ENHORABUENA TE HAS REGISTRADO CON EXITO")
+        messagebox.showinfo("BBDDD Creada con exito", "ENHORABUENA YA TIENES TÚ BBDD CREADA")
     except:
-        messagebox.showinfo("USUARIO REGISTRADO", "ENHORABUENA TE HAS REGISTRADO CON EXITO")
+        messagebox.showinfo("LA BBDD YA ESTÁ CREADA", "SIGUE CON EL PROCCESO ")
 #Función que nos permite abir la foto y leerla. Nos la devulve como BLOB
 def convertir_foto(foto):
     with open(foto, "rb") as f:
