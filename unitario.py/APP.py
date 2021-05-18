@@ -18,6 +18,7 @@ root.title("PALEVLAS")
 #***************************************** IMAGEN CENTRAL DE LA PROTECTORA ******************************************************************************************
 #********************************************************************************************************************************************************************
 imagen = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Proctetora.png")
+#image= imagen.subsample(2,2)#Con está instrucción, se puede modificar el tamaño de las imagenes.
 Imagen_2 =Label(root, image=imagen)
 Imagen_2.place(x=650, y=220)
 #***************************************** ETIQUETAS-CUADROS DE TEXTO-VARIABLES  ******************************************************************************************
@@ -380,6 +381,7 @@ def segunda_ventana():
         b5=Button(perro, text="Registrar Fecha", command= Fecha_actual)
         b5.place(x=700, y= 10)
         perro.config(menu=menubar)
+        
         perro.mainloop()
 
     #---------------------------------------------------------------------------------------------------------------------
