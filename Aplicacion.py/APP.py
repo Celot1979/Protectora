@@ -304,7 +304,7 @@ def segunda_ventana():
             miConexion = sqlite3.connect("Protectora.db")
 
             miCursor= miConexion.cursor()
-
+            #Función que permite leer una imagen y conertirla en bytes
             def convertir_foto(miFoto):
 
                 with open(miFoto, "rb") as f:
