@@ -702,6 +702,7 @@ def segunda_ventana():
         miRaza =StringVar()
         miEdad=StringVar()
         miFecha=StringVar()
+        miFoto= StringVar()
         def conexionBBDD():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
@@ -712,7 +713,8 @@ def segunda_ventana():
                 LUGAR VARCHAR(50) NOT NULL, 
                 RAZA VARCHAR(50) NOT NULL, 
                 EDAD VARCHAR(50) NOT NULL, 
-                FECHA VARCHAR(50) NOT NULL)""")
+                FECHA VARCHAR(50) NOT NULL,
+                 FOTO BLOB NOT NULL)""")
                 messagebox.showinfo("CONEXION", "Base de Datos Creada Exitosamente")
             except:
                 messagebox.showinfo("CONEXION", "Conexión exitosa con la BBDD")
@@ -740,6 +742,7 @@ def segunda_ventana():
             miRaza.set("")
             miEdad.set("")
             miFecha.set("")
+            miFoto.set(" ")
         def mensaje():
             acerca=""" 
             Aplicación CRUD
@@ -750,9 +753,13 @@ def segunda_ventana():
         def crear():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
+            def convertir_foto(miFoto):
+                with open(miFoto, "rb") as f:
+                    blob = f.read()
+                return blob
             try:
-                datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
-                miCursor.execute("INSERT INTO gato VALUES(NULL,?,?,?,?,?,?)", (datos))
+                datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get(), convertir_foto(miFoto.get())
+                miCursor.execute("INSERT INTO gato VALUES(NULL,?,?,?,?,?,?,?)", (datos))
                 miConexion.commit()
             except:
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
@@ -768,12 +775,12 @@ def segunda_ventana():
             try:
                 miCursor.execute("SELECT * FROM gato")
                 for row in miCursor:
-                    tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6]))
+                    tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6],row[7]))
             except:
                 pass
         #Tabla
-        tree = ttk.Treeview(gato,height=10, columns=("#0", "#1", "#2","#3","#4","#5"))
-        tree.place(x=0, y=130)
+        tree = ttk.Treeview(gato,height=10, columns=("#0", "#1", "#2","#3","#4","#5","#6"))
+        tree.place(x=0, y=200)
         tree.column("#0",width = 75)#Darles tamaños a las columnas
         #Cabeceras de la tabla
         tree.heading("#0", text= "ID",anchor= CENTER)
@@ -784,6 +791,8 @@ def segunda_ventana():
         tree.heading("#4", text= "Raza", anchor= CENTER)
         tree.heading("#5", text= "Edad", anchor= CENTER)
         tree.heading("#6", text= "Fecha de registro", anchor= CENTER)
+        tree.heading("#7", text= "Foto", anchor= CENTER)
+
         def seleccionarUsandoClic(event):
             item= tree.identify("item", event.x,event.y)
             miId.set(tree.item(item,"text"))
@@ -793,6 +802,7 @@ def segunda_ventana():
             miRaza.set(tree.item(item,"values")[3])
             miEdad.set(tree.item(item,"values")[4])
             miFecha.set(tree.item(item,"values")[5])
+            miFoto.set(tree.item(item,"values")[6])
         tree.bind("<Double-1>", seleccionarUsandoClic)
         #Funciones 2ª
 
@@ -800,8 +810,8 @@ def segunda_ventana():
             miConexion = sqlite3.connect("Protectora.db")
             miCursor= miConexion.cursor()
             try:
-                datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
-                miCursor.execute("UPDATE gato SET NOMBRE = ?, CHIP = ?, LUGAR = ?, RAZA = ?, EDAD = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos))
+                datos = miNombre.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get(), miFoto.get()
+                miCursor.execute("UPDATE gato SET NOMBRE = ?, CHIP = ?, LUGAR = ?, RAZA = ?, EDAD = ?, FECHA = ?, FOTO = ? WHERE ID = "+ miId.get(), (datos))
                 miConexion.commit()
             except:
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al actualizar el resgistro")
@@ -828,7 +838,39 @@ def segunda_ventana():
             format = now.strftime('%d - %m - %Y')
             miFecha.set(format)
             miFecha.get()
-        #La funcionalidad está concluida.
+        def mostrar_foto():
+
+            miConexion = sqlite3.connect("Protectora.db")
+
+            miCursor= miConexion.cursor()
+
+            miCursor.execute("SELECT * FROM gato WHERE  ID =" + miId.get())
+
+            row = miCursor.fetchone()
+
+            miCursor.close()
+
+            miConexion.close()
+
+            if row is not None:
+
+                v_foto=row[7]
+
+                img = Image.open(io.BytesIO(v_foto))
+
+                pic= ImageTk.PhotoImage(img)
+
+                imagen = Label(gato, image=pic).place(x= 900, y = 600)
+
+                
+
+        
+
+            else:
+
+                imagen = Label(gato, text="Imagen no disponible, height=20, with= 40")
+
+            imagen.place(x= 900, y = 600)
         ############################# DISEÑO DE LA INTERFAZ ########################################################
         #1º Menú INICIO
         menubar = Menu(gato)
@@ -878,19 +920,31 @@ def segunda_ventana():
         l5.place(x=350, y=10)
         l5=Entry(gato, textvariable=miFecha)
         l5.place(x=475, y= 10)
+
+        l6= Label(gato, text="Foto")
+        l6.place(x=50, y=120)
+        l6=Entry(gato, textvariable=miFoto, width= 20)
+        l6.place(x=110, y= 120)
+
+
+
         #Botones
         b1=Button(gato, text="Crea Registro", command= crear)
-        b1.place(x=0, y= 400)
+        b1.place(x=0, y= 600)
         b2=Button(gato, text="Modificar registro", command= actualizar)
-        b2.place(x=120, y= 400)
+        b2.place(x=120, y= 600)
         b3=Button(gato, text="Mostrar Lista", command= mostrar)
-        b3.place(x=270, y= 400)
+        b3.place(x=270, y= 600)
         b4=Button(gato, text="Eliminar Registro", command= borrar)
-        b4.place(x=390, y= 400)
+        b4.place(x=390, y= 600)
 
         b5=Button(gato, text="Registrar Fecha", command= Fecha_actual)
         b5.place(x=700, y= 10)
         b5.config(bg="red")
+
+        b6=Button(gato, text="Ver Foto", command= mostrar_foto)
+        b6.place(x=500, y= 600)
+        
         gato.config(menu=menubar)
         gato.mainloop()
 
