@@ -1,6 +1,7 @@
 import sqlite3
 from tkinter import *
 from tkinter import messagebox
+import io
 from PIL import Image, ImageTk
 root= Tk()
 root.title("Prueba")
@@ -36,11 +37,29 @@ def crear():
         miConexion.commit()
     except:
         messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
+def mostrar_foto():
+    miConexion = sqlite3.connect("FOTO.db")
+    miCursor= miConexion.cursor()
+    miCursor.execute("SELECT FOTO FROM FOTO WHERE ID= 1" )
+    row=miCursor.fetchone()
+    miCursor.close()
+    miConexion.close()
+    if row is not None:
+        v_foto = row[3]
+        img = Image.open(io.BytesIO(v_foto))
+        pic= ImageTk.PhotoImage(img)
+        imagen = Label(root, image=pic)
+        imagen.place(x=400, y=400)
+    else:
+        imagen = Label(root, text = "Imagen no encontrada")
+        imagen.place(x=400, y=400)
+    imagen.place(x=400, y=400)
     
 
 def registrar_nuevo():
     conexionBBDD_usuario()
     crear()
+    mostrar_foto()
     messagebox.showinfo("USUARIO REGISTRADO", "ENHORABUENA TE HAS REGISTRADO CON EXITO")
 
 n = Label(root,text="Nombre")

@@ -7,6 +7,8 @@ from datetime import date
 from datetime import datetime
 from tkinter import *
 from tkcalendar import Calendar
+from PIL import Image, ImageTk
+import io
 
 #***************************************** VENTANA PRINCIPAL  ******************************************************************************************
 #****************************************  PANTALLA PRINCIPAL ******************************************************************************************
@@ -17,7 +19,7 @@ root.geometry("5000x5000")
 root.title("PALEVLAS")
 #***************************************** IMAGEN CENTRAL DE LA PROTECTORA ******************************************************************************************
 #********************************************************************************************************************************************************************
-imagen = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Proctetora.png")
+imagen = PhotoImage(file="Src\imag\Proctetora.png")
 #image= imagen.subsample(2,2)#Con está instrucción, se puede modificar el tamaño de las imagenes.
 Imagen_2 =Label(root, image=imagen)
 Imagen_2.place(x=650, y=220)
@@ -174,214 +176,511 @@ def segunda_ventana():
     #************************************** TERCERA PANTALLA PRINCIPAL ******************************************************************************************
     #********************************************************************************************************************************************************************
     def registro():
+
         root.iconify()
+
         ventana_dos.iconify()
+
         perro= Toplevel()
+
         perro.geometry("5000x5000")
+
         perro.title("Registro de nuevo perro")
+
         ############################################## COMENZAMOS LA BBDD Y REGISTROS ###########################################################
+
         miId=StringVar()
+
         miNombre_Perro= StringVar()
+
         miChip=StringVar()
+
         miLugar =StringVar()
+
         miRaza =StringVar()
+
         miEdad=StringVar()
+
         miFecha=StringVar()
+
+        miFoto= StringVar()
+
         #Conexión de la BBDD
+
         def conexionBBDD():
+
             miConexion = sqlite3.connect("Protectora.db")
+
             miCursor= miConexion.cursor()
+
             try:
+
                 miCursor.execute("""CREATE TABLE perro(ID INTEGER PRIMARY KEY AUTOINCREMENT,
+
                 NOMBRE_PERRO VARCHAR(50) NOT NULL, 
+
                 CHIP VARCHAR(50) NOT NULL, 
+
                 LUGAR VARCHAR(50) NOT NULL, 
+
                 RAZA VARCHAR(50) NOT NULL, 
+
                 EDAD VARCHAR(50) NOT NULL, 
-                FECHA VARCHAR(50) NOT NULL)""")
+
+                FECHA VARCHAR(50) NOT NULL,
+
+                FOTO BLOB NOT NULL)""")
+
                 messagebox.showinfo("CONEXION", "Base de Datos Creada Exitosomanete")
+
             except:
+
                 messagebox.showinfo("CONEXION", "Conexión exitosa con la BBDD")
+
         def eliminarBBDD():
+
             miConexion = sqlite3.connect("Protectora.db")
+
             miCursor= miConexion.cursor()
+
             if messagebox.askyesno(mensaje = "¿Los Datos se perderán definitivamente, Desea continuar: ?", title="ADVERTENCIA"):
+
                 miCursor.execute("DROP TABLE perro")
+
             else:
+
                 pass
+
                 limpiarCampos()
+
                 mostrar()
+
         def salirAplicacion():
+
             valor = messagebox.askquestion("Salir","¿Estás seguro que deseas salir? ")
+
             if valor == "yes":
+
                 perro.destroy()
+
                 ventana_dos.destroy()
+
                 root.destroy()
+
         def limpiarCampos():
+
             miId.set("")
+
             miNombre_Perro.set("")
+
             miChip.set("")
+
             miLugar.set("")
+
             miRaza.set("")
+
             miEdad.set("")
+
             miFecha.set("")
+
+            miFoto.set(" ")
+
         def mensaje():
+
             acerca=""" 
+
             Aplicación CRUD
+
             Versión 1.0
+
             Tecnología Python Tkinter    
+
             """
+
             messagebox.showinfo(title="INFORMACION", message= acerca)
+
         def crear():
+
             miConexion = sqlite3.connect("Protectora.db")
+
             miCursor= miConexion.cursor()
+
+            def convertir_foto(miFoto):
+
+                with open(miFoto, "rb") as f:
+
+                    blob = f.read()
+
+                return blob
+
             try:
-                datos_perro = miNombre_Perro.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
-                miCursor.execute("INSERT INTO perro VALUES(NULL,?,?,?,?,?,?)", (datos_perro))
+
+                datos_perro = miNombre_Perro.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get(), convertir_foto(miFoto.get())
+
+                miCursor.execute("INSERT INTO perro VALUES(NULL,?,?,?,?,?,?,?)", (datos_perro))
+
                 miConexion.commit()
+
             except:
+
                 messagebox.showinfo("ADVERTENCIA", "Ocurrió un error al crear el registro, verifique la conexión")
+
             limpiarCampos()
+
             mostrar()
 
+ 
+
         
+
+ 
 
         def mostrar():
+
             miConexion = sqlite3.connect("Protectora.db")
+
             miCursor= miConexion.cursor()
+
             registros = tree.get_children()
+
             for elemento in registros:
+
                 tree.delete(elemento)
+
             try:
+
                 miCursor.execute("SELECT * FROM perro")
+
                 for row in miCursor:
-                    tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6]))
+
+                    tree.insert("",0, text=row[0], values=(row[1], row[2], row[3],row[4],row[5],row[6],row[7]))
+
             except:
+
                 pass
+
         #Tabla
-        tree = ttk.Treeview(perro,height=10, columns=("#0", "#1", "#2","#3","#4","#5"))
-        tree.place(x=0, y=130)
+
+        tree = ttk.Treeview(perro,height=10, columns=("#0", "#1", "#2","#3","#4","#5","#6"))
+
+        tree.place(x=0, y=200)
+
         tree.column("#0",width = 75)#Darles tamaños a las columnas
+
         #Cabeceras de la tabla
+
         tree.heading("#0", text= "ID",anchor= CENTER)
+
         tree.heading("#1", text= "Nombre del perro", anchor= CENTER)
+
         tree.heading("#2", text= "Chip", anchor= CENTER)
+
         tree.heading("#3", text= "Lugar", anchor= CENTER)
+
         tree.column("#3",width = 100)
+
         tree.heading("#4", text= "Raza", anchor= CENTER)
+
         tree.heading("#5", text= "Edad", anchor= CENTER)
+
         tree.heading("#6", text= "Fecha de registro", anchor= CENTER)
+
+        tree.heading("#7", text= "Foto", anchor= CENTER)
+
+        
+
         def seleccionarUsandoClic(event):
+
             item= tree.identify("item", event.x,event.y)
+
             miId.set(tree.item(item,"text"))
+
             miNombre_Perro.set(tree.item(item,"values")[0])
+
             miChip.set(tree.item(item,"values")[1])
+
             miLugar.set(tree.item(item,"values")[2])
+
             miRaza.set(tree.item(item,"values")[3])
+
             miEdad.set(tree.item(item,"values")[4])
+
             miFecha.set(tree.item(item,"values")[5])
+
+            miFoto.set(tree.item(item,"values")[6])
+
         tree.bind("<Double-1>", seleccionarUsandoClic)
+
+        
+
         #Funciones 2ª
 
+ 
+
         def actualizar():
+
             miConexion = sqlite3.connect("Protectora.db")
+
             miCursor= miConexion.cursor()
+
             try:
-                datos_perro = miNombre_Perro.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get()
-                miCursor.execute("UPDATE perro SET NOMBRE_PERRO = ?, CHIP = ?, LUGAR = ?, RAZA = ?, EDAD = ?, FECHA = ? WHERE ID = "+ miId.get(), (datos_perro))
+
+                datos_perro = miNombre_Perro.get(),miChip.get(),miLugar.get(),miRaza.get(),miEdad.get(),miFecha.get(), miFoto.get()
+
+                miCursor.execute("UPDATE perro SET NOMBRE_PERRO = ?, CHIP = ?, LUGAR = ?, RAZA = ?, EDAD = ?, FECHA = ?, FOTO = ? WHERE ID = "+ miId.get(), (datos_perro))
+
                 miConexion.commit()
+
             except:
+
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al actualizar el resgistro")
+
                 pass
+
             limpiarCampos()
+
             mostrar()
+
         def borrar():
+
             miConexion = sqlite3.connect("Protectora.db")
+
             miCursor= miConexion.cursor()
+
             try:
+
                 if messagebox.askyesno(message="¿Realmente desea eliminar el registro?", title="ADVERTENCIA"):
+
                     miCursor.execute("DELETE FROM perro WHERE ID =" + miId.get())
+
                     miConexion.commit()
+
             except:
+
                 messagebox.showwarning("ADVERTENCIA", "Ocurrio un error al intentar eliminar el registro")
+
             limpiarCampos()
+
             mostrar()
+
+ 
 
         def pagina_anterior():
+
             
+
             segunda_ventana()
 
+ 
+
         def Fecha_actual():
+
             now = datetime.now()
+
             format = now.strftime('%d - %m - %Y')
+
             miFecha.set(format)
+
             miFecha.get()
 
+        """ Función implementada para que al presionar el botón ver foto ( una vez seleccionado el registro),
+
+        Aparaezca la foto al lado de los botones."""
+
+        def mostrar_foto():
+
+            miConexion = sqlite3.connect("Protectora.db")
+
+            miCursor= miConexion.cursor()
+
+            miCursor.execute("SELECT * FROM perro WHERE  ID =" + miId.get())
+
+            row = miCursor.fetchone()
+
+            miCursor.close()
+
+            miConexion.close()
+
+            if row is not None:
+
+                v_foto=row[7]
+
+                img = Image.open(io.BytesIO(v_foto))
+
+                pic= ImageTk.PhotoImage(img)
+
+                imagen = Label(perro, image=pic).place(x= 900, y = 600)
+
+                
+
+        
+
+            else:
+
+                imagen = Label(perro, text="Imagen no disponible, height=20, with= 40")
+
+            imagen.place(x= 900, y = 600)
+            
+
+ 
+
         #La funcionalidad está concluida.
+
         ############################# DISEÑO DE LA INTERFAZ ########################################################
+
         #1º Menú INICIO
+
         menubar = Menu(perro)
+
         menubasedat= Menu(menubar, tearoff=0)
+
         menubasedat.add_command(label="Crear/Conectar BBDD", command=conexionBBDD)
+
         menubasedat.add_command(label="Eliminar BBDD", command=eliminarBBDD)
+
         menubasedat.add_command(label="Salir", command= salirAplicacion)
+
         menubar.add_cascade(label="Inicio", menu= menubasedat)
+
         #Segundo menú AYUDA
+
         ayudamenu= Menu(menubar, tearoff=0)
+
         ayudamenu.add_command(label="Resetear Campos", command=limpiarCampos)
+
         ayudamenu.add_command(label="Acerca", command=mensaje)
+
         menubar.add_cascade(label="Ayuda", menu= ayudamenu)
 
+ 
+
         atrasmenu = Menu(menubar, tearoff=0)
+
         atrasmenu.add_command(label="Pagina anterior", command=pagina_anterior)
+
         menubar.add_cascade(label="Páginas anterior", menu= atrasmenu)
+
         #Etiquetas y cajas de texto
+
         e1= Entry(perro, textvariable=miId)
 
+ 
+
         l2= Label(perro, text="Nombre")
+
         l2.place(x=50, y=10)
+
         e2=Entry(perro, textvariable=miNombre_Perro)
+
         e2.place(x=110, y= 10)
 
+ 
+
         l3= Label(perro, text="Chip")
+
         l3.place(x=50, y=40)
+
         e3=Entry(perro, textvariable=miChip)
+
         e3.place(x=110, y= 40)
 
+ 
+
         l4= Label(perro, text="Lugar")
+
         l4.place(x=50, y=80)
+
         l4=Entry(perro, textvariable=miLugar)
+
         l4.place(x=110, y= 80)
 
+ 
+
         l5= Label(perro, text="Raza")
+
         l5.place(x=350, y=80)
+
         l5=Entry(perro, textvariable=miRaza)
+
         l5.place(x=475, y= 80)
 
+ 
+
         l5= Label(perro, text="Edad")
+
         l5.place(x=350, y=40)
+
         l5=Entry(perro, textvariable=miEdad)
+
         l5.place(x=475, y= 40)
 
+ 
+
         l5= Label(perro, text="Fecha de Registro")
+
         l5.place(x=350, y=10)
+
         l5=Entry(perro, textvariable=miFecha, width= 20)
+
         l5.place(x=475, y= 10)
+
+        
+
+        l6= Label(perro, text="Foto")
+
+        l6.place(x=50, y=120)
+
+        l6=Entry(perro, textvariable=miFoto, width= 20)
+
+        l6.place(x=110, y= 120)
+
+        
+
+
+
+
         #Botones
+
         b1=Button(perro, text="Crea Registro", command= crear)
-        b1.place(x=0, y= 400)
+
+        b1.place(x=0, y= 600)
+
+ 
+
         b2=Button(perro, text="Modificar registro", command= actualizar)
-        b2.place(x=120, y= 400)
+
+        b2.place(x=120, y= 600)
+
+ 
+
         b3=Button(perro, text="Mostrar Lista", command= mostrar)
-        b3.place(x=270, y= 400)
+
+        b3.place(x=270, y= 600)
+
+ 
+
         b4=Button(perro, text="Eliminar Registro", command= borrar)
-        b4.place(x=390, y= 400)
+
+        b4.place(x=390, y= 600)
+
         b4.config(bg="red")
 
-        b5=Button(perro, text="Registrar Fecha", command= Fecha_actual)
-        b5.place(x=700, y= 10)
-        perro.config(menu=menubar)
         
+
+ 
+
+        b5=Button(perro, text="Registrar Fecha", command= Fecha_actual)
+
+        b5.place(x=700, y= 10)
+
+        perro.config(menu=menubar)
+
+ 
+
+        b6=Button(perro, text="Ver Foto", command= mostrar_foto)
+
+        b6.place(x=500, y= 600)
+
         perro.mainloop()
 
     #---------------------------------------------------------------------------------------------------------------------
@@ -1138,7 +1437,7 @@ def segunda_ventana():
     ################################################################## RESTO DE LA VENTANA PRINCIPAL ####################################################################
     #IMAGENES*************************************
     #Perro 
-    imagen = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Perro 2.png") 
+    imagen = PhotoImage(file="Src\imag\Perro 2.png") 
     Imagen_P =Label(ventana_dos, image=imagen)
     Imagen_P.place(x=840, y=300)
     perros = Button(ventana_dos, text="Entrada de Perros", width=20, height=6,command=ingreso_perro )
@@ -1146,7 +1445,7 @@ def segunda_ventana():
     #perros.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectoras
-    imagen4 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/casa2.png")
+    imagen4 = PhotoImage(file="Src\imag\casa2.png")
     Imagen_V =Label(ventana_dos, image=imagen4)
     Imagen_V.place(x=1340, y=600)
     visitas= Button(ventana_dos, text="Visitas", width=20, height=6,command=ingreso_visitas)
@@ -1154,14 +1453,14 @@ def segunda_ventana():
     #visitas.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectora
-    imagen3 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/family 2.png")
+    imagen3 = PhotoImage(file="Src\imag\Adoptantes.png")
     Imagen_A =Label(ventana_dos, image=imagen3)
     Imagen_A.place(x=1340, y=300)
     Adoptar= Button(ventana_dos, text="Adoptantes", width=20, height=6, command= ingreso_adopcion)
     Adoptar.place(x=1100, y= 300)
     #Adoptar.config(overrelief=GROOVE, relief=FLAT)
     #Gato
-    imagen2 = PhotoImage(file="/Users/danielgil/Desktop/Protectora/Src/imag/Gato 2.png")
+    imagen2 = PhotoImage(file="Src\imag\Gato 2.png")
     Imagen_G =Label(ventana_dos, image=imagen2)
     Imagen_G.place(x=840, y=600)
     gatos = Button(ventana_dos, text="Entrada de gatos", width=20, height=6,command=ingreso_gato )
