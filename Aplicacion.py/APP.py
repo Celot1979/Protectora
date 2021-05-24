@@ -1497,32 +1497,47 @@ def segunda_ventana():
     ################################################################## RESTO DE LA VENTANA PRINCIPAL ####################################################################
     #IMAGENES*************************************
     #Perro 
-    """imagen = PhotoImage(file="Src\imag\Perro 2.png") 
-    Imagen_P =Label(ventana_dos, image=imagen)
-    Imagen_P.place(x=840, y=300)"""
+    if os.name == "nt":
+        imagen = PhotoImage(file="Src\imag\Perro 2.png") 
+        Imagen_P =Label(ventana_dos, image=imagen)
+        Imagen_P.place(x=840, y=300)
+
+    else:
+        pass
+
     perros = Button(ventana_dos, text="Entrada de Perros", width=20, height=6,command=ingreso_perro )
     perros.place(x=600, y= 300)
     #perros.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectoras
-    """imagen4 = PhotoImage(file="Src\imag\casa2.png")
-    Imagen_V =Label(ventana_dos, image=imagen4)
-    Imagen_V.place(x=1340, y=600)"""
+    if os.name == "nt":
+        imagen4 = PhotoImage(file="Src\imag\casa2.png")
+        Imagen_V =Label(ventana_dos, image=imagen4)
+        Imagen_V.place(x=1340, y=600)
+    else:
+        pass
     visitas= Button(ventana_dos, text="Visitas", width=20, height=6,command=ingreso_visitas)
     visitas.place(x=1100, y= 600)
     #visitas.config(overrelief=GROOVE, relief=FLAT)
 
     #Protectora
-    """imagen3 = PhotoImage(file="Src\imag\Adoptantes.png")
-    Imagen_A =Label(ventana_dos, image=imagen3)
-    Imagen_A.place(x=1340, y=300)"""
+    if os.name == "nt":
+        imagen3 = PhotoImage(file="Src\imag\Adoptantes.png")
+        Imagen_A =Label(ventana_dos, image=imagen3)
+        Imagen_A.place(x=1340, y=300)
+
+    else:
+        pass
     Adoptar= Button(ventana_dos, text="Adoptantes", width=20, height=6, command= ingreso_adopcion)
     Adoptar.place(x=1100, y= 300)
     #Adoptar.config(overrelief=GROOVE, relief=FLAT)
     #Gato
-    """imagen2 = PhotoImage(file="Src\imag\Gato 2.png")
-    Imagen_G =Label(ventana_dos, image=imagen2)
-    Imagen_G.place(x=840, y=600)"""
+    if os.name == "nt":
+        imagen2 = PhotoImage(file="Src\imag\Gato 2.png")
+        Imagen_G =Label(ventana_dos, image=imagen2)
+        Imagen_G.place(x=840, y=600)
+    else:
+        pass
     gatos = Button(ventana_dos, text="Entrada de gatos", width=20, height=6,command=ingreso_gato )
     gatos.place(x=600, y= 600)
     #gatos.config(overrelief=GROOVE, relief=FLAT)
