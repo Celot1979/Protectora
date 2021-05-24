@@ -19,12 +19,12 @@ root.geometry("5000x5000")
 root.title("PALEVLAS")
 #***************************************** IMAGEN CENTRAL DE LA PROTECTORA ******************************************************************************************
 #********************************************************************************************************************************************************************
-if os.name == "nt":
+if os.name == "nt":#Para Windows
     imagen = PhotoImage(file="Src\imag\Proctetora.png")
     #image= imagen.subsample(2,2)#Con está instrucción, se puede modificar el tamaño de las imagenes.
     Imagen_2 =Label(root, image=imagen)
     Imagen_2.place(x=650, y=220)
-else:
+else:#Para Imac
     imagen = PhotoImage(file="Src/imag/Proctetora.png")
     #image= imagen.subsample(2,2)#Con está instrucción, se puede modificar el tamaño de las imagenes.
     Imagen_2 =Label(root, image=imagen)
@@ -222,19 +222,12 @@ def segunda_ventana():
             try:
 
                 miCursor.execute("""CREATE TABLE perro(ID INTEGER PRIMARY KEY AUTOINCREMENT,
-
                 NOMBRE_PERRO VARCHAR(50) NOT NULL, 
-
                 CHIP VARCHAR(50) NOT NULL, 
-
                 LUGAR VARCHAR(50) NOT NULL, 
-
                 RAZA VARCHAR(50) NOT NULL, 
-
                 EDAD VARCHAR(50) NOT NULL, 
-
                 FECHA VARCHAR(50) NOT NULL,
-
                 FOTO BLOB NOT NULL)""")
 
                 messagebox.showinfo("CONEXION", "Base de Datos Creada Exitosomanete")
@@ -294,13 +287,9 @@ def segunda_ventana():
         def mensaje():
 
             acerca=""" 
-
             Aplicación CRUD
-
             Versión 1.0
-
             Tecnología Python Tkinter    
-
             """
 
             messagebox.showinfo(title="INFORMACION", message= acerca)
@@ -490,7 +479,6 @@ def segunda_ventana():
             miFecha.get()
 
         """ Función implementada para que al presionar el botón ver foto ( una vez seleccionado el registro),
-
         Aparaezca la foto al lado de los botones."""
 
         def mostrar_foto():
@@ -1531,7 +1519,11 @@ def segunda_ventana():
         Imagen_A.place(x=1340, y=300)
 
     else:
+<<<<<<< HEAD
         imagen3 = PhotoImage(file="Src/imag/Adoptantes.png")
+=======
+        imagen3 = PhotoImage(file="Src\imag\Adoptantes.png")
+>>>>>>> c08052ed805cef342b4eb815e56300bd34558d99
         Imagen_A =Label(ventana_dos, image=imagen3)
         Imagen_A.place(x=1340, y=300)
     Adoptar= Button(ventana_dos, text="Adoptantes", width=20, height=6, command= ingreso_adopcion)
