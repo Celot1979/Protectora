@@ -1519,11 +1519,7 @@ def segunda_ventana():
         Imagen_A.place(x=1340, y=300)
 
     else:
-<<<<<<< HEAD
         imagen3 = PhotoImage(file="Src/imag/Adoptantes.png")
-=======
-        imagen3 = PhotoImage(file="Src\imag\Adoptantes.png")
->>>>>>> c08052ed805cef342b4eb815e56300bd34558d99
         Imagen_A =Label(ventana_dos, image=imagen3)
         Imagen_A.place(x=1340, y=300)
     Adoptar= Button(ventana_dos, text="Adoptantes", width=20, height=6, command= ingreso_adopcion)
