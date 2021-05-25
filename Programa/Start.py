@@ -2,7 +2,7 @@
 from tkinter import*
 import os
 from imagen_central import *
-from Validacion import *
+from validacion import *
 """Principio del programa. Esté archivo ejecuta todo el programa """
 
 raiz = Tk()
