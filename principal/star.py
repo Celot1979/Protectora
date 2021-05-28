@@ -10,6 +10,8 @@ class Protectora:
         #self.frame.config(bg="lightblue")   
         self.frame.config(width=1200,height=5000) 
         self.frame= principal(self)
+        
+        
 
         
 
