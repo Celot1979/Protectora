@@ -1,5 +1,5 @@
 from tkinter import *
-
+"""Creación de un frame para poder ubicar mejor los elementos de la ventana principal """
 def principal(self):
     self.nombre = StringVar()
     self.etiqueta_nom = Label(self.frame, text="Nombre",)
