@@ -1,5 +1,6 @@
 from tkinter import *
 from inter_pri import *
+
 raiz = Tk()
 class Protectora:
     def __init__(self,ventana):
