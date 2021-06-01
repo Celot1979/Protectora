@@ -1,5 +1,5 @@
 
-from bbdd import cagada,crear
+from bbdd import *
 from tkinter import *
 
 import psycopg2
@@ -26,7 +26,7 @@ def principal(self):
         self.imprimir ="ME caguen to"
         print(self.imprimir)
         cagada(self)
-        crear(self)
+        crear_tabla()
 
 
     self.boton1 = Button(self.frame, text="CONECTAR")
