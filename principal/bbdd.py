@@ -56,5 +56,5 @@ def registro_usuario(nombre,contrasena):
         messagebox.showinfo("Registro", "Registro creado con exito")
     except:
         messagebox.showwarning("ATENCIÓN", "ERROR EN EL REGISTRO")
-    """Intento de registrar usuarios de la protectora """
+    
 
