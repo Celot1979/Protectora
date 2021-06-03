@@ -1,6 +1,6 @@
 from tkinter import *
 from inter_pri import *
-
+from tkinter import messagebox
 raiz = Tk()
 class Protectora:
     def __init__(self,ventana):

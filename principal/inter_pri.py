@@ -1,7 +1,7 @@
 
 from bbdd import *
 from tkinter import *
-
+from tkinter import messagebox
 import psycopg2
 
 
@@ -23,10 +23,11 @@ def principal(self):
     self.entrada_con.grid(row= 2,column=3)
     
     def registrar(self):
-        self.imprimir ="ME caguen to"
+        self.imprimir ="Prueba"
         print(self.imprimir)
         cagada(self)
         crear_tabla()
+        registro_usuario(self.nombre, self.contrasena)
 
 
     self.boton1 = Button(self.frame, text="CONECTAR")
