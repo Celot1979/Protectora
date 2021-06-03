@@ -32,11 +32,14 @@ def principal(self):
         self.nombre.set(" ")
         self.contrasena.set(" ")
 
+    def salir(self):
+        self.ventana.destroy()
+
 
 
     self.boton1 = Button(self.frame, text="CONECTAR",command=lambda:conectar(self))
     self.boton1.grid(row=3,column=1, padx= 10, pady= 30)
-    self.boton2 = Button(self.frame, text="SALIR")
+    self.boton2 = Button(self.frame, text="SALIR",command=lambda:salir(self))
     self.boton2.grid(row=3,column=2, padx= 10, pady= 30)
     self.boton3 = Button(self.frame, text="REGISTRAR",command=lambda:registrar(self))
     self.boton3.grid(row=3,column=3, padx= 10, pady= 30)
