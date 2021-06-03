@@ -28,14 +28,19 @@ def principal(self):
     def conectar(self):
         conectar_usuario(self.nombre.get(),self.contrasena.get())
 
-    
+    def borrar(self):
+        self.nombre.set(" ")
+        self.contrasena.set(" ")
+
+
+
     self.boton1 = Button(self.frame, text="CONECTAR",command=lambda:conectar(self))
     self.boton1.grid(row=3,column=1, padx= 10, pady= 30)
     self.boton2 = Button(self.frame, text="SALIR")
     self.boton2.grid(row=3,column=2, padx= 10, pady= 30)
     self.boton3 = Button(self.frame, text="REGISTRAR",command=lambda:registrar(self))
     self.boton3.grid(row=3,column=3, padx= 10, pady= 30)
-    self.boton4 = Button(self.frame, text="BORRAR")
+    self.boton4 = Button(self.frame, text="BORRAR",command=lambda:borrar(self))
     self.boton4.grid(row=3,column=4, padx= 10, pady= 30)
 
     self.imagen = PhotoImage(file="Src/imag/Proctetora.png")

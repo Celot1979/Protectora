@@ -1,5 +1,5 @@
 from tkinter import *
-from inter_pri import *
+from window_1 import *
 from tkinter import messagebox
 raiz = Tk()
 
