@@ -27,7 +27,9 @@ def principal(self):
         print(self.imprimir)
         cagada(self)
         crear_tabla()
-        registro_usuario(self.nombre, self.contrasena)
+        nombre = self.nombre.get()
+        contrasena = self.contrasena.get()
+        registro_usuario(nombre,contrasena)
 
 
     self.boton1 = Button(self.frame, text="CONECTAR")

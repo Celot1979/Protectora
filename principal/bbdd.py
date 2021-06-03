@@ -3,20 +3,11 @@ from tkinter import *
 from tkinter import messagebox
 import psycopg2
 def cagada(self):
-    self.cagada = "Yo me caguen to"
+    self.cagada = "Prueba1"
     print(self.cagada)
 
 
-"""def conexion():
-        con =psycopg2.connect(
-            host= "localhost",
-            database = "Protectora",
-            user = "postgres",
-            password = "1234")
-        print("Conexion con éxito")
-        cursor =con.cursor()"""
 
-        
 
 def crear_tabla():
     con =psycopg2.connect(
@@ -49,8 +40,8 @@ def registro_usuario(nombre,contrasena):
     try:
         cursor =con.cursor()
         
-        datos = nombre.get(),contrasena.get()
-        sql = "INSERT INTO REGISTROS (NOMBRE,CONTRASENA) VALUES (%s,%s)"
+        datos = nombre,contrasena
+        sql = "INSERT INTO REGISTROS (NOMBRE,CONTRASENA) VALUES ('?','?')"
         cursor.execute(sql, datos)
         con.commit()
         messagebox.showinfo("Registro", "Registro creado con exito")
