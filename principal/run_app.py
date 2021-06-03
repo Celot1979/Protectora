@@ -9,6 +9,7 @@ class Protectora:
     def __init__(self, ventana):
         self.ventana = ventana
         self.ventana.title("BIENVENIDO A PALEVLAS ")
+        self.ventana.attributes('-fullscreen', True)#Apertura en ventana completa
         self.frame = Frame(self.ventana)
         
         self.frame.pack(expand=1)
