@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 import psycopg2
 
+
 def get_connection():
     return psycopg2.connect(
         host="localhost",
@@ -43,12 +44,13 @@ def registro_usuario(nombre, contrasena):
     except:
         messagebox.showwarning("ATENCIÓN", "ERROR EN EL REGISTRO")
 
+
 def conectar_usuario(nombre, contrasena):
     crear_tabla()
     con = get_connection()
     try:
         cursor = con.cursor()
-        datos = nombre,contrasena
+        datos = nombre, contrasena
         sql = "SELECT * FROM USERS WHERE NOMBRE = %s AND CONTRASENA = %s"
         cursor.execute(sql, datos)
         if cursor.fetchone():
