@@ -1,60 +1,9 @@
 from tkinter import Tk
 from tkinter import *
-"""En este archivo tome la decisión de encapslar una clase en una función."""
-def opciones_protectora():
-    r = Tk()
-    class Opciones():
-        def __init__(self,opcion):
-            #Creación de la interfaz de elección de la categoría / opción que se desea entrar
-            self.opcion = opcion
-            self.opcion.title("REGISTROS EN PALEVLAS ")
-            self.opcion.attributes('-fullscreen', True)  #Apertura en ventana completa
-            #Creación del frame que permite la cración de los botones
-            self.frame_dos = Frame(self.opcion)
-            self.frame_dos.pack(expand=1)
-            self.frame_dos.config(bg="lightblue",width= 1000, height= 1000)
 
-            ##################################################################################################################
-            """Funciones de los botones"""
-            def perro():
-                print("Entrada de perro")
-
-            def gato():
-                print("Entrada de gato")
-
-            def adoptante():
-                print("Adopcion concuida")
-
-            def visitas():
-                print("visita programada")
-            #__________________________________________________________________________________________________________________
-            
-            #Creación de lo botones dentro del Frame
-            #Creación de la opción de registros de perros
-            self.perro = Button(self.frame_dos, text="Entrada de perros",command=perro())
-            self.perro.grid(row=3,column=1, padx= 10, pady= 30)
-
-            self.imagen_p = PhotoImage(file="Src/imag/Proctetora.png")
-            self.Imagen_pe= Label(self.frame_dos, image=self.imagen_p)
-            self.Imagen_pe.grid(row=4,column= 2)
-
-            #Creación de la opción de registros de gatos
-            self.gato = Button(self.frame_dos, text="Entrada de gatos",command =gato())
-            self.gato.grid(row=5,column=1, padx= 10, pady= 30)
-
-            #Creación de la opción de registros de adoptantes
-            self.adoptantes = Button(self.frame_dos, text="Adoptantes",command =adoptante())
-            self.adoptantes.grid(row=3,column=6, padx= 10, pady= 30)
-
-            #Creación de la opción de registros de visitas
-            self.visitas = Button(self.frame_dos, text="Visitas",command =visitas())
-            self.visitas.grid(row=5,column=6, padx= 10, pady= 30)
-            ##################################################################################################################
-            
-            
-
-        
-
-    op = Opciones()
+"""La finalidad de este archivo es organizar los botones de una segunda ventana que contenga los botones 
+para elegir que opción interesa más al usuario"""
+def opciones_protectora(self):
     
-    r.mainloop()   
+    self.opciones = Frame(self.ventana)
+
