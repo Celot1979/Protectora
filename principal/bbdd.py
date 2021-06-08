@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 import psycopg2
 from window_option import *
+from prueba_ventana import *
 
 
 def get_connection():
@@ -56,7 +57,9 @@ def conectar_usuario(nombre, contrasena):
         cursor.execute(sql, datos)
         if cursor.fetchone():
             print("Usuario logeado")
-            opciones_protectora()
+            #opciones_protectora()
+            op = Opciones(raiz)
+
         else:
             messagebox.showwarning("ATENCIÓN", "Error al logearse")
     except Exception as e:

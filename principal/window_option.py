@@ -13,6 +13,8 @@ def opciones_protectora():
             self.frame_dos = Frame(self.opcion)
             self.frame_dos.pack(expand=1)
             self.frame_dos.config(bg="lightblue",width= 1000, height= 1000)
+
+            ##################################################################################################################
             """Funciones de los botones"""
             def perro():
                 print("Entrada de perro")
@@ -25,14 +27,16 @@ def opciones_protectora():
 
             def visitas():
                 print("visita programada")
+            #__________________________________________________________________________________________________________________
+            
             #Creación de lo botones dentro del Frame
             #Creación de la opción de registros de perros
             self.perro = Button(self.frame_dos, text="Entrada de perros",command=perro())
             self.perro.grid(row=3,column=1, padx= 10, pady= 30)
 
-            """self.imagen = PhotoImage(file="Src/imag/Proctetora.png")
-            self.Imagen2= Label(self.frame_dos, image=self.imagen)
-            self.Imagen2.grid(row=4,columnspan=6)"""
+            self.imagen_p = PhotoImage(file="Src/imag/Proctetora.png")
+            self.Imagen_pe= Label(self.frame_dos, image=self.imagen_p)
+            self.Imagen_pe.grid(row=4,column= 2)
 
             #Creación de la opción de registros de gatos
             self.gato = Button(self.frame_dos, text="Entrada de gatos",command =gato())
@@ -45,12 +49,12 @@ def opciones_protectora():
             #Creación de la opción de registros de visitas
             self.visitas = Button(self.frame_dos, text="Visitas",command =visitas())
             self.visitas.grid(row=5,column=6, padx= 10, pady= 30)
-
+            ##################################################################################################################
             
             
 
         
 
-    op = Opciones(r)
+    op = Opciones()
     
     r.mainloop()   
