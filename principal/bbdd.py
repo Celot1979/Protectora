@@ -7,10 +7,8 @@ from window_option import *
 
 def get_connection():
     return psycopg2.connect(
-        host="localhost",
-        database="Protectora",
-        user="postgres",
-        password="1234")
+        host="localhost", database="Protectora", user="postgres", password="1234"
+    )
 
 
 def crear_tabla():
