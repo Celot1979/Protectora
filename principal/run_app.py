@@ -4,7 +4,7 @@ from window_user import *
 from tkinter import messagebox
 raiz = Tk()
 
-
+#Quitado
 class Protectora:
     def __init__(self, ventana):
         self.ventana = ventana
