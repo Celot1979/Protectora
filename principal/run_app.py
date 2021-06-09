@@ -3,7 +3,7 @@ from window_user import *
 
 from tkinter import messagebox
 raiz = Tk()
-
+#Es una prueba
 
 class Protectora:
     def __init__(self, ventana):
