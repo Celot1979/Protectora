@@ -16,11 +16,8 @@ class Protectora:
         #self.frame.config(bg="lightblue")
         self.frame.config(width=1200, height=5000)
         self.frame = principal(self)
+        
 
-    def propiedad(self):
-        self.propiedad = Label(self.ventana, text="Aplicación realizada con Python")  
-    
 
 Proyecto = Protectora(raiz)
-Proyecto.propiedad()
 raiz.mainloop()

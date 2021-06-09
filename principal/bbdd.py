@@ -1,9 +1,8 @@
-
+import builtins
 from tkinter import *
 from tkinter import messagebox
 import psycopg2
 from window_option import *
-
 
 
 def get_connection():
@@ -58,8 +57,7 @@ def conectar_usuario(nombre, contrasena):
         if cursor.fetchone():
             print("Usuario logeado")
             opciones_protectora()
-            #print("Hola que tal")
         else:
             messagebox.showwarning("ATENCIÓN", "Error al logearse")
     except Exception as e:
-        messagebox.showwarning("", e)
+        messagebox.showwarning("ATENCIÓN", e)
