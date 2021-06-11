@@ -38,17 +38,21 @@ def opciones_protectora():
 
             self.imagen = PhotoImage(file="src/imag/Perro 2.png")
             self.Imagen2= Label(self.frame_dos, image=self.imagen)
-            self.Imagen2.grid(row=4,columnspan=6)
+            self.Imagen2.grid(row=3,column= 6)
 
             # Creación de la opción de registros de gatos
             self.gato = Button(self.frame_dos, text="Entrada de gatos", command=gato())
             self.gato.grid(row=5, column=1, padx=10, pady=30)
 
             # Creación de la opción de registros de adoptantes
-            self.adoptantes = Button(
-                self.frame_dos, text="Adoptantes", command=adoptante()
-            )
-            self.adoptantes.grid(row=3, column=6, padx=10, pady=30)
+            self.adoptantes = Button(self.frame_dos, text="Adoptantes", command=adoptante())
+            self.adoptantes.grid(row=3, column=8, padx=10, pady=30)
+
+            self.im_v = PhotoImage(file="src/imag/Adoptantes.png")
+            self.Imagen_v = Label(self.frame_dos, image=self.im_v)
+            self.Imagen_v.grid(row=3,column=9)
+
+            
 
             # Creación de la opción de registros de visitas
             self.visitas = Button(self.frame_dos, text="Visitas", command=visitas())
