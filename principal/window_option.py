@@ -29,9 +29,13 @@ def opciones_protectora():
             def visitas():
                 print("visita programada")
 
+
+            def perro_2():
+                print("Prueba")
+
             # Creación de lo botones dentro del Frame
             # Creación de la opción de registros de perros
-            self.perro = Button(self.frame_dos, text="Entrada de perros",height= 5, command=perro())
+            self.perro = Button(self.frame_dos, text="Entrada de perros",height= 5, command=lambda:perro())
             self.perro.grid(row=3, column=1, padx=10, pady=30)
 
             self.imagen = PhotoImage(file="Src/imag/Perro 2.png")
@@ -39,7 +43,7 @@ def opciones_protectora():
             self.Imagen2.grid(row=3, column=2)
 
             # Creación de la opción de registros de gatos
-            self.gato = Button(self.frame_dos, text="Entrada de gatos",height= 5, command=gato())
+            self.gato = Button(self.frame_dos, text="Entrada de gatos",height= 5, command=lambda:gato())
             self.gato.grid(row=5, column=1, padx=10, pady=30)
 
             self.g = PhotoImage(file="Src/imag/Gato 2.png")
@@ -47,7 +51,7 @@ def opciones_protectora():
             self.im_g.grid(row=5,column=2)
 
             # Creación de la opción de registros de adoptantes
-            self.adoptantes = Button(self.frame_dos, text="Adoptantes",height= 5, command=adoptante())
+            self.adoptantes = Button(self.frame_dos, text="Adoptantes",height= 5, command=lambda:adoptante())
             self.adoptantes.grid(row=3, column=6, padx=10, pady=30)
 
             self.imagen_v = PhotoImage(file="Src/imag/Adoptantes.png")
@@ -55,13 +59,18 @@ def opciones_protectora():
             self.im_v.grid(row=3,column=7)
 
             # Creación de la opción de registros de visitas
-            self.visitas = Button(self.frame_dos, text="Visitas",height= 5, command=visitas())
+            self.visitas = Button(self.frame_dos, text="Visitas",height= 5, command=lambda:visitas())
             self.visitas.grid(row=5, column=6, padx=10, pady=30)
 
             self.imagen_vi=PhotoImage(file="Src/imag/casa2.png")
             self.im_vi = Label(self.frame_dos, image=self.imagen_vi)
             self.im_vi.grid(row=5,column=7)
 
+        
+            
+           
+
     op = Opciones(r)
+  
 
     r.mainloop()
