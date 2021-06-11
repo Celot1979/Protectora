@@ -3,7 +3,7 @@ from tkinter import *
 
 
 def opciones_protectora():
-    r = Tk()
+    r = Toplevel()
 
     class Opciones:
         def __init__(self, opcion):
@@ -36,9 +36,9 @@ def opciones_protectora():
             )
             self.perro.grid(row=3, column=1, padx=10, pady=30)
 
-            """self.imagen = PhotoImage(file="Src/imag/Proctetora.png")
+            self.imagen = PhotoImage(file="src/imag/Perro 2.png")
             self.Imagen2= Label(self.frame_dos, image=self.imagen)
-            self.Imagen2.grid(row=4,columnspan=6)"""
+            self.Imagen2.grid(row=4,columnspan=6)
 
             # Creación de la opción de registros de gatos
             self.gato = Button(self.frame_dos, text="Entrada de gatos", command=gato())
