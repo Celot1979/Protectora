@@ -68,7 +68,7 @@ def opciones_protectora():
             self.im_vi = Label(self.frame_dos, image=self.imagen_vi)
             self.im_vi.grid(row=5,column=7)
 
-        def menu (self,opcion_2):
+        def menu (self,opcion_2):#Opciones laterales...
             self.opcion_2 = opcion_2
             self.frame_tres = Frame(self.opcion_2)
             self.frame_tres.place(x= 50, y = 400)
