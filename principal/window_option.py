@@ -1,6 +1,8 @@
 from tkinter import Tk
+from tkinter import ttk
 from tkinter import *
-from tools import *
+
+
 
 def opciones_protectora():
     r = Toplevel()
@@ -66,11 +68,17 @@ def opciones_protectora():
             self.im_vi = Label(self.frame_dos, image=self.imagen_vi)
             self.im_vi.grid(row=5,column=7)
 
-        
+        def menu (self,opcion_2):
+            self.opcion_2 = opcion_2
+            self.frame_tres = Frame(self.opcion_2)
+            self.frame_tres.place(x= 50, y = 400)
+            self.frame_tres.config(bg="lightblue", width=500, height=500)
             
-           
+                
+                
+
+
 
     op = Opciones(r)
-  
-
+    op.menu(r)
     r.mainloop()
