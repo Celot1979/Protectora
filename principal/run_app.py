@@ -1,5 +1,6 @@
 from tkinter import *
 from window_user import *
+from tkinter import ttk
 
 from tkinter import messagebox
 raiz = Tk()

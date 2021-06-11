@@ -73,6 +73,14 @@ def opciones_protectora():
             self.frame_tres = Frame(self.opcion_2)
             self.frame_tres.place(x= 50, y = 400)
             self.frame_tres.config(bg="lightblue", width=500, height=500)
+            m_g = Label(self.frame_tres,text="Escoja su elección").place(x=1,y=1)
+            self.comboExample = ttk.Combobox(self.frame_tres ,values=[
+                                    "January", 
+                                    "February",
+                                    "March",
+                                    "April"])
+            self.comboExample.title="Opciones"
+            self.comboExample.place(x=1,y=50)
             
                 
                 
