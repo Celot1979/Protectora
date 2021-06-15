@@ -4,9 +4,10 @@ from tkinter import *
 
 
 
+
 def opciones_protectora():
     r = Toplevel()
-
+    
     class Opciones:
         def __init__(self, opcion):
             # Creación de la interfaz de elección de la categoría / opción que se desea entrar
@@ -74,8 +75,17 @@ def opciones_protectora():
             self.frame_tres.place(x= 0, y = 0)
             self.frame_tres.config(bg="lightblue", width=5000, height=100)
             #Radiobutton
-            self.rdB= Radiobutton(self.frame_tres,text="SALIR",value=1).place(x = 10, y =0)
-            self.rdB_2= Radiobutton(self.frame_tres,text="AYUDA",value=2).place(x = 100, y =0)
+            self.elegir_opcion = Label(self.frame_tres, text="MENÚ DE ELECCIÓN").place(x = 10, y =0)
+            self.seleccion = IntVar()
+            def cerrar(self):
+                self.r_end = r.destroy()
+            def estado(self):
+                self.s = self.seleccion.get()
+                if self.s == 1:
+                    cerrar(self)
+                    
+            self.rdB= Radiobutton(self.frame_tres,text="SALIR",value=1,variable = self.seleccion, command=lambda:estado(self)).place(x = 10, y = 50)
+            self.rdB_2= Radiobutton(self.frame_tres,text="INFORMACIÓN",value=2,variable = self.seleccion,command=lambda:estado(self)).place(x = 100, y =50)
             
             
 
