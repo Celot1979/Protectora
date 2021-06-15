@@ -75,15 +75,15 @@ def opciones_protectora():
             self.frame_tres.place(x= 0, y = 0)
             self.frame_tres.config(bg="lightblue", width=5000, height=100)
             #Radiobutton
-            self.elegir_opcion = Label(self.frame_tres, text="MENÚ DE ELECCIÓN").place(x = 10, y =0)
-            self.seleccion = IntVar()
-            def cerrar(self):
+            self.elegir_opcion = Label(self.frame_tres, text="MENÚ DE ELECCIÓN").place(x = 10, y =0)#Titulo de menú de elección
+            self.seleccion = IntVar()#Variable de comparación de elección por parte del usuario
+            def cerrar(self):#Función que implementará el cierre por instrucción del Toplevel
                 self.r_end = r.destroy()
-            def estado(self):
+            def estado(self):#Funcíon que hace la comparación entre lo elegido por el usuario y las determinadas funciones
                 self.s = self.seleccion.get()
                 if self.s == 1:
                     cerrar(self)
-                    
+            #Radiobotones que dan a elegir enter dos opciones        
             self.rdB= Radiobutton(self.frame_tres,text="SALIR",value=1,variable = self.seleccion, command=lambda:estado(self)).place(x = 10, y = 50)
             self.rdB_2= Radiobutton(self.frame_tres,text="INFORMACIÓN",value=2,variable = self.seleccion,command=lambda:estado(self)).place(x = 100, y =50)
             
