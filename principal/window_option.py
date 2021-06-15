@@ -71,16 +71,15 @@ def opciones_protectora():
         def menu (self,opcion_2):#Opciones laterales...
             self.opcion_2 = opcion_2
             self.frame_tres = Frame(self.opcion_2)
-            self.frame_tres.place(x= 50, y = 400)
-            self.frame_tres.config(bg="lightblue", width=500, height=500)
-            m_g = Label(self.frame_tres,text="Escoja su elección").place(x=1,y=1)
-            self.comboExample = ttk.Combobox(self.frame_tres ,values=[
-                                    "January", 
-                                    "February",
-                                    "March",
-                                    "April"])
-            self.comboExample.title="Opciones"
-            self.comboExample.place(x=1,y=50)
+            self.frame_tres.place(x= 0, y = 0)
+            self.frame_tres.config(bg="lightblue", width=5000, height=100)
+            #Radiobutton
+            self.rdB= Radiobutton(self.frame_tres,text="SALIR",value=1).place(x = 10, y =0)
+            self.rdB_2= Radiobutton(self.frame_tres,text="AYUDA",value=2).place(x = 100, y =0)
+            
+            
+
+
             
                 
                 
