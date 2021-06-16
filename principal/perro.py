@@ -34,41 +34,43 @@ def acogida_perro():
 
             #entrys
 
-            self.e_id=Entry(self.frame_perro, textvariable = id).grid(row=1,column=2)
-            self.e_nombre=Entry(self.frame_perro, textvariable = nombre).grid(row=2,column=2)
-            self.e_lugar=Entry(self.frame_perro, textvariable = lugar).grid(row=1,column=4)
-            self.e_raza=Entry(self.frame_perro, textvariable = raza).grid(row=2,column=4)
-            self.e_edad=Entry(self.frame_perro, textvariable = edad).grid(row=3,column=4)
-            self.e_foto=Entry(self.frame_perro, textvariable = foto).grid(row=1,column=6)
-            self.e_chip=Entry(self.frame_perro, textvariable = chip).grid(row=3,column=2)
+            self.e_id=Entry(self.frame_perro, textvariable = self.id).grid(row=1,column=2)
+            self.e_nombre=Entry(self.frame_perro, textvariable = self.nombre).grid(row=2,column=2)
+            self.e_lugar=Entry(self.frame_perro, textvariable = self.lugar).grid(row=1,column=4)
+            self.e_raza=Entry(self.frame_perro, textvariable = self.raza).grid(row=2,column=4)
+            self.e_edad=Entry(self.frame_perro, textvariable = self.edad).grid(row=3,column=4)
+            self.e_foto=Entry(self.frame_perro, textvariable = self.foto).grid(row=1,column=6)
+            self.e_chip=Entry(self.frame_perro, textvariable = self.chip).grid(row=3,column=2)
+
+            def guardar(self):
+                print("Hola mundo")
+            def borrar():
+                id.set(" ")
+                nombre.set(" ")
+                lugar.set(" ")
+                raza.set(" ")
+                edad.set(" ")
+                chip.set(" ")
+                foto.set(" ")
+            def modificar(self):
+                print("Modificado")
+            def salir(self):
+                self.p_end = p.destroy()
+            #Botones
+            self.boton_guardar= Button(self.frame_perro , text= "GUARDAR", command = lambda: guardar(self),padx=10, pady=10).grid(row=1,column=1)
+            self.boton_borrado= Button(self.frame_perro, text= "BORRAR", command =borrar(),padx=10, pady=10).grid(row=1,column=2)
+            self.boton_modificar= Button(self.frame_perro, text= "MODIFICAR", command = lambda: modificar(self),padx=10, pady=10).grid(row=1,column=3)
+            self.boton_salir= Button(self.frame_perro, text= "SALIR", command = lambda: salir(self),padx=10, pady=10).grid(row=1,column=4)
 
         def botones(self,op_boton):
             self.opc_boton= op_boton
             self.frame_boton = Frame(self.opc_boton)
             self.frame_boton.place(x=60, y=200)
             #Funciones
-            def guardar(self):
-                print("Hola mundo")
-            def borrar(self):
-                self.e_id.set("")
-                self.e_nombre.set("")
-                self.e_lugar.set("")
-                self.e_raza.set("")
-                self.e_edad.set("")
-                self.e_foto.set("")
-                self.e_foto.set("")
-            def modificar(self):
-                print("Modificado")
-            def salir(self):
-                print("Sacado")
-            #Botones
-            self.boton_guardar= Button(self.frame_boton , text= "GUARDAR", command = lambda: guardar(self),padx=10, pady=10).grid(row=1,column=1)
-            self.boton_borrado= Button(self.frame_boton , text= "BORRAR", command = lambda: borrar(self),padx=10, pady=10).grid(row=1,column=2)
-            self.boton_modificar= Button(self.frame_boton , text= "MODIFICAR", command = lambda: modificar(self),padx=10, pady=10).grid(row=1,column=3)
-            self.boton_salir= Button(self.frame_boton , text= "SALIR", command = lambda: salir(self),padx=10, pady=10).grid(row=1,column=4)
+            
 
 
     perro_1 = Perro(p)
     perro_1.la_en(p) 
-    perro_1.botones(p)
+    #perro_1.botones(p)
     p.mainloop()
