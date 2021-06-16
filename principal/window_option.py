@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import *
 from tkinter import messagebox
 from window_info import *
+from perro import acogida_perro 
 
 
 
@@ -23,7 +24,7 @@ def opciones_protectora():
             """Funciones de los botones"""
 
             def perro():
-                print("Entrada de perro")
+                acogida_perro()
 
             def gato():
                 print("Entrada de gato")
